@@ -12,6 +12,7 @@
     <orderEntry type="library" name="org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpclient:4.2" level="project" />
     <orderEntry type="library" scope="TEST" name="junit:junit:4.11" level="project" />
     <orderEntry type="library" name="org.jsoup:jsoup:1.7.2" level="project" />
+    <orderEntry type="library" name="org.apache.directory.studio:org.apache.commons.io:2.4" level="project" />
   </component>
 </module>
 
