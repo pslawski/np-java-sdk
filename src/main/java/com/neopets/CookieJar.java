@@ -15,6 +15,7 @@ import org.apache.http.client.CookieStore;
 import org.apache.http.impl.client.BasicCookieStore;
 
 public class CookieJar {
+
   private File file;
 
   public CookieJar(File file) {
@@ -59,4 +60,5 @@ public class CookieJar {
       oss.close();
     }
   }
+
 }

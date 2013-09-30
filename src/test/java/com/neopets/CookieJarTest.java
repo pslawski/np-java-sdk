@@ -12,8 +12,9 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class CookieJarTest {
+
   private static final int COOKIES_COUNT = 40;
-  private static final String TEMP_FILE_PATH = "cookiJar.temp";
+  private static final String TEMP_FILE_PATH = "cookieJar.temp";
 
   @Test
   public void testLoad() throws Exception {
