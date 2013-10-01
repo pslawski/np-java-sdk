@@ -1,0 +1,1143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!--
+ host - neopets-web-21.811.mtvi.com
+//-->
+<html>
+
+<head>
+	<meta name="description" content="Neopets.Com - Virtual Pet Community! Join up for free games, shops, auctions, chat and more!">
+	<meta name="keywords" content="pets, pet, games, game, virtual, chat, fun, prizes, play, virtual pet, kids">
+	<meta name="robots" content="noodp, index, follow">
+	<meta http-equiv="X-UA-Compatible" content="IE=8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+
+	<link rel="stylesheet" type="text/css" href="http://images.neopets.com/css/default.css?v=4">
+	<link rel="stylesheet" type="text/css" href="http://images.neopets.com/css/ad.css?v=3">
+
+		<link rel="stylesheet" type="text/css" href="http://images.neopets.com/mamabar/mamabar.css">
+		<link rel="stylesheet" type="text/css" href="http://images.neopets.com/css/themes/000_def_f65b1.css?v=4">
+		
+	<title>Neopets - The National Neopian Bank</title>
+
+	<script id="js-framework" type="text/javascript" language="JavaScript" src="http://images.neopets.com/js/common.js?v=6"></script>
+
+		<script src="http://images.neopets.com/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://images.neopets.com/js/jquery-ui-1.8.17.min.js" type="text/javascript"></script>
+	
+	
+	<script type="text/javascript">
+	var Neo = {
+		clog: function() {
+			if (window.console && console.log) {
+				if (arguments.length == 0) {
+					console.log('! no arguments passed !');
+				} else if (arguments.length == 1) {
+					console.log(arguments[0]);
+				} else {
+					console.log(arguments);
+				}
+			}
+		},
+		popups: {
+			list: [],
+			add: function(popup) {
+				Neo.popups.list.push(popup);
+				Neo.fade.show();
+			},
+			rem: function(popup) {
+				for (var i = Neo.popups.list.length - 1; i >= 0; i--) {
+					var curPopup = Neo.popups.list[i];
+					Neo.clog(i, popup, curPopup, popup == curPopup);
+					if (curPopup == popup) {
+						Neo.popups.list.splice(i, 1);
+					}
+				}
+				if (Neo.popups.list.length == 0) {
+					Neo.fade.hide();
+				}
+			},
+			remAll: function() {
+				Neo.popups.list = [];
+				Neo.fade.hide();
+			}
+		},
+		fade: {
+			show: function() {
+				$('#neoFade').show();
+			},
+			hide: function() {
+				$('#neoFade').hide();
+			}
+		},
+		setNp: function(newnp) {
+			$('#npanchor').text(newnp);
+		},
+		precache: function(url) {
+			if ($.isArray(url)) {
+				for (var i = 0; i < url.length; i++) {
+					new Image().src = url[i];
+				}
+			} else {
+				new Image().src = url;
+			}
+		}
+	};
+	</script>
+	<style type="text/css">
+		#neoFade { display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.5; background: black; filter: alpha(opacity=50); z-index: 9500; }
+	</style>
+	
+	<script id="js-browserdetect" type="text/javascript" language="JavaScript" src="http://images.neopets.com/js/getbrowser.js?v=1"></script>
+	<script type="text/javascript" src="http://images.neopets.com/n.js"></script>	<script type="text/javascript">
+	<!--
+		var nl = "en";
+		var nh = 8;
+		var nm = 5;
+		var ns = 29;
+		var na = "pm";
+		var ncl = new Array(0, 53, 104, 137, 169, 198, 231, 265, 299, 335, 368, 397, 427);
+
+		window.setInterval('nc()', 1000);
+
+		function sh(i) {
+			ol.style.clip = "rect("+ncl[i-1]+" 128 "+ncl[i]+" 0)";
+			ol.style.visibility = "visible";
+		}
+
+		function mo() {
+			ol.style.visibility = "hidden";
+		}
+
+		function search_handle(searchForm) {
+			searchForm.action = "/search.phtml";
+			searchForm.target = "";
+			searchForm.method = "post";
+			searchForm.s.value = searchForm.q.value;
+			searchForm.submit();
+		};
+		function logout_nchub() {
+			var f = document.createElement("iframe");
+			f.setAttribute("src", "http://nc.neopets.com/auth/logout?no-redirect=1");
+			f.setAttribute("width", "0");
+			f.setAttribute("height", "0");
+			f.setAttribute("border", "0");
+	
+			var i = document.getElementById('logout_nchub');
+			i.appendChild(f);
+
+      var f = document.createElement("iframe");
+      f.setAttribute("src", "http://s2.parature.com/ics/support/custhandler.asp?deptID=5174&task=signOut");
+      f.setAttribute("width", "0");
+      f.setAttribute("height", "0");
+      f.setAttribute("border", "0");
+  
+      var i = document.getElementById('logout_parature');
+      i.appendChild(f);			
+		}
+		jQuery(document).ready(function(){
+			$('a#logout_link').click(function (event) {
+				setTimeout(function() {window.location = '/logout.phtml';},1000);
+				logout_nchub();
+				return false;
+			});
+		});
+	//-->
+	</script>
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-1152868-1']);
+_gaq.push(['_setCustomVar', 1, 'age-gender', 'male-20', 2]);
+_gaq.push(['_trackPageview', '/bank.phtml']);
+(function() {
+	var ga = document.createElement('script');
+	ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(ga, s);
+})();
+
+</script>
+<script type="text/javascript" src="http://images.neopets.com/js/kids/coda.js"></script>
+<script type="text/javascript" src="http://games.mtvnservices.com/scripts/mtvngameloader.1.1.0.js"></script>
+<script type="text/javascript" src="http://images.neopets.com/js/kids/ads.js"></script>
+<script>
+KIDS.ads.setGender("m");
+KIDS.ads.setAge(20);
+</script>
+<script type="text/javascript">
+function omnitureTrackPage(advertiser, id) { return sendReportingCall(id, advertiser); }
+function omnitureTrackClick(advertiser, id) { return sendADLinkCall(advertiser + " - " + id); }
+</script>
+<script type="text/javascript">
+	KIDS.ads.config = {"url":"/","text":"/","gameLoaderCap":"0","zone":"","ads":[{"size":"728x90","elementID":"ad-728x90IF","keyValues":";mtfIFPath=/asm/doubleclick/;","dartPercent":"1.0","refreshable":"true","refreshRate":"0.5","yahooAds":"false"},{"size":"300x250","elementID":"ad-300x250IF-atf","keyValues":"pos=atf;","dartPercent":"1.0","refreshable":"true","refreshRate":"0.5","yahooAds":"false"},{"size":"160x600","elementID":"ad-160x600IF","keyValues":"pos=atf;","dartPercent":"1.0","refreshable":"true","refreshRate":"0.5","yahooAds":"false"}],"demo":{"gender":false,"age":false}};
+</script>
+</head>
+<body class="en">	<div id="neoFade"></div>
+		<!-- MAMABAR CODE BLOCK -->
+	<script type="text/javascript">
+		function brandMamabarMoreOver(el) { el.className = "brand-mamabar-more-link brand-mamabar-more-link-hover"; }
+		function brandMamabarMoreOut(el) { el.className = "brand-mamabar-more-link"; }
+	</script>
+	<div class="brand-mamabar">
+		<div class="brand-mamabar-wrapper">
+			<ul class="brand-mamabar-list">
+				<li><a class="brand-mamabar-active">neopets</a></li>
+				<li><a href="http://www.petpetpark.com/">petpet park</a></li>
+				<li><a href="http://www.monkeyquest.com">monkey quest</a></li>
+				<li><a href="http://www.nick.com/">nick</a></li>
+				<li><a href="http://www.shockwave.com/">shockwave</a></li>
+				<li class="brand-mamabar-more-link" onmouseover="brandMamabarMoreOver(this);" onmouseout="brandMamabarMoreOut(this);">
+					<a class="brand-mamabar-more-a" href="#"><span>more</span></a>
+					<div class="brand-mamabar-more-wrapper">
+						<ul class="brand-mamabar-more-list">
+							<li class="brand-mamabar-first"><a href="http://www.teenNick.com/">teennick</a></li>
+							<li><a href="http://www.nickjr.com/">nickjr</a></li>
+							<li><a href="http://www.addictinggames.com/">addictinggames</a></li>
+							<li><a href="http://www.nicktoons.com/">nicktoons</a></li>
+							<li><a href="http://www.nickatnite.com/">nick at nite</a></li>
+							<li><a href="http://www.upickdaily.com/">upick daily</a></li>
+							<li><a href="http://www.parentsconnect.com/">parents connect</a></li>
+							<li><a href="http://www.spongebob.com/">spongebob</a></li>
+							<li><a href="http://www.icarly.com/">icarly.com</a></li>
+							<li><a href="http://www.troopgrid.com/">troopgrid</a></li>
+							<li><a href="http://www.nickarcade.com/">nick arcade</a></li>
+							<li><a href="http://www.nickjrarcade.com/">nickjr arcade</a></li>
+							<li class="brand-mamabar-last"><a href="http://www.nickjrboost.com">nickjr boost</a></li>
+						</ul>
+					</div>
+				</li>
+			</ul>
+			<a class="brand-mamabar-logo" href="http://www.nick.com/"><img alt="Nickelodeon" src="http://images.neopets.com/mamabar/logo_nick_mini.jpg" height="18" width="100"></a>
+		</div>
+	</div>
+		<div id="pushdown_banner">
+		<div id="ad-slug-wrapper">
+			<table id="ad-table">
+				<tr>
+					<td class="slug"><img src="http://images.neopets.com/adslug-opa-l.png" width="13" height="66"></td>
+					<td>
+						<div id='ad-728x90Div'>
+		<script type='text/javascript' language='javascript'>
+		KIDS.ads.refresh.placeAd('ad-728x90Div');
+	</script>
+	</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<div id="main" class= >
+
+<div id="ban"  ></div>
+
+	<div id="header">
+		<table cellpadding="0" cellspacing="0" border="0">
+			<tr>
+				<td width="156" rowspan="3"><a href="/index.phtml"><img src="http://images.neopets.com/transparent_spacer.gif" width="156" height="77" alt="" border="0"></a></td>
+				<td class="eventIcon sf" xalign="left">&nbsp;</td>
+				<td class="user medText">
+Welcome, <a href="/userlookup.phtml?user=test">test</a> <span style="font-weight: normal;">|</span> NP: <a id='npanchor' href="/inventory.phtml">22,812</a> <span style='font-weight: normal;'>|</span> NC: <a href='/mall/index.phtml'>150</a> <span style="font-weight: normal;">|</span> <a id="logout_link" href="/logout.phtml"><b>Logout</b></a>				</td>
+			</tr>
+			<tr>
+				<td colspan="2" id="navigation">
+					<table width="100%" cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td width="725" align="center">
+<script type="text/javascript">
+	// Yay for Suckerfish!
+	startList = function() {
+		if (document.all&&document.getElementById) {
+			navRoot = document.getElementById("template_nav");
+			for (i=0; i<navRoot.childNodes.length; i++) {
+				node = navRoot.childNodes[i];
+				if (node.nodeName=="LI") {
+					node.onmouseover=function() {
+						this.className+=" over";
+					}
+					node.onmouseout=function() {
+						this.className=this.className.replace(" over", "");
+					}
+				}
+			}
+		}
+	}
+	window.onload=startList;
+</script>
+
+<ul id="template_nav">
+	<li class="nav_image"><a href="/myaccount.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/myaccount.png" alt="" border="0" width="115" height="38"></a><ul class="dropdown">
+			<li><a href="/myaccount.phtml">&raquo; Control Panel</a></li>
+			<li><a href="/preferences.phtml">&raquo; Preferences</a></li>
+			<li><a href="/userinfo.phtml">&raquo; Edit Profile</a></li>
+			<li><a href="/neomessages.phtml">&raquo; Neomail</a></li>
+			<li><a href="/neofriends.phtml">&raquo; Neofriends</a></li>
+			<li><a href="/addpet.phtml">&raquo; Create a Neopet</a></li>
+						<li><a href="/space/warehouse/prizecodes.phtml">&raquo; Redeem Code</a></li>
+				</ul>
+
+	<li class="nav_image"><a href="/customise/"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/customise.png" alt="" border="0" width="90" height="38"></a><ul class="dropdown">
+			<li><a href="/customise/">&raquo; Customise Neopet</a></li>
+			<li><a href="/inventory.phtml">&raquo; Inventory</a></li>
+			<li><a href="/closet.phtml">&raquo; Closet</a></li>
+			<li><a href="/neohome/"> &raquo; Neohomes</a></li>
+			<li><a href="/addpet.phtml">&raquo; Create a Neopet</a></li>
+			<li><a href="/pound/">&raquo; Pound</a></li>
+		</ul>
+	</li>
+
+		<li class="nav_image"><a href="/games/"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/games.png" alt="" border="0" width="65" height="38"></a><ul class="dropdown">
+			<li><a href="/games/">&raquo; Games Room</a></li>
+			<li><a href="/games/category.phtml?sortby=pop">&raquo; Popular</a></li>
+			<li><a href="/games/hiscores.phtml">&raquo; High Scores</a></li>
+			<li><a href="/games/favourites.phtml">&raquo; Favourites</a></li>
+			<li><a href="/keyquest/">&raquo; Key Quest</a></li>
+						<li><a href="/habitarium/">&raquo; Habitarium</a></li>
+						<li><a href="/dome/">&raquo; Battledome</a></li>
+		</ul>
+	</li>
+	
+	<li class="nav_image"><a href="/explore.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/explore.png" alt="" border="0" width="74" height="38"></a><ul class="dropdown">
+			<li><a href="/explore.phtml">&raquo; Map of Neopia</a></li>
+			<li><a href="/help/tutorial/index.phtml">&raquo; Tutorial</a></li>
+						<li><a href="/neopedia.phtml">&raquo; Neopedia</a></li>
+			<li><a href="/petcentral.phtml">&raquo; Pet Central</a></li>
+			<li><a href="/calendar.phtml">&raquo; Calendar</a></li>
+		</ul>
+	</li>
+
+	<li class="nav_image"><a href="/nf.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/news.png" alt="" border="0" width="57" height="38"></a><ul class="dropdown">
+		<li><a href="/nf.phtml">&raquo; New Features</a></li>
+		<li><a href="/comingsoon.phtml">&raquo; Coming Soon</a></li>
+		<li><a href="/ntimes/index.phtml">&raquo; Neopian Times</a></li><li><a href="/stuff.phtml">&raquo; Merch News</a></li>		</ul>
+	</li>
+
+	
+	<li class="nav_image"><a href="/community/index.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/community.png" alt="" border="0" width="97" height="38"></a><ul class="dropdown">
+			<li><a href="/community/index.phtml">&raquo; Hub</a></li>
+			<li><a href="/neoboards/index.phtml">&raquo; Neoboards</a></li>
+						<li><a href="/contests.phtml">&raquo; Spotlights</a></li>
+			<li><a href="/guilds/index.phtml">&raquo; Guilds</a></li>
+		</ul>
+	</li>
+	<li class="nav_image"><a href="/objects.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/shops.png" alt="" border="0" width="61" height="38"></a><ul class="dropdown">
+			<li><a href="/objects.phtml">&raquo; Neopia Central</a></li>
+			<li><a href="/market.phtml?type=wizard">&raquo; Shop Wizard</a></li>
+			<li><a href="/market.phtml?type=your">&raquo; Your Shop</a></li>
+			<li><a href="/auctions.phtml">&raquo; Auctions</a></li>
+			<li><a href="/island/tradingpost.phtml">&raquo; Trading Post</a></li>
+			<li><a href="/bank.phtml">&raquo; Bank</a></li>
+						<li><a href="/shopping/index.phtml">&raquo; Merchandise</a></li>
+				</ul>
+	</li>
+
+	<style type="text/css">
+		li.nav_image { margin-left: 0px; }
+	</style>
+	<li class="nav_image"><a href="http://ncmall.neopets.com/mall/index.phtml"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/ncmall.png" alt="" border="0" width="70" height="38"></a><ul class="dropdown">
+			<li><a href="http://ncmall.neopets.com/mall/index.phtml">&raquo; Shop</a></li>
+			<li><a href="http://nc.neopets.com/get-nickcash">&raquo; Get NC</a></li>
+			<li><a href="http://nc.neopets.com/nickcash-cards">&raquo; Find Nick Game Cards</a></li>
+			<li><a href="http://nc.neopets.com/redeemnc">&raquo; Redeem Nick Game Cards</a></li>
+			<li><a href='http://nc.neopets.com/transactionlog/'>&raquo; Transaction Log</a></li>
+					</ul>
+	</li>
+		<style type="text/css">
+		li.nav_image { margin-left: 0px; }
+	</style>
+		<li class="nav_image"><a href="http://nc.neopets.com/membership/"><img src="http://images.neopets.com/themes/000_def_f65b1/navigation/premium.png" alt="" border="0" width="96" height="38"></a><ul class="dropdown">
+
+						<li><a href="http://nc.neopets.com/membership/">&raquo; Become a Member</a></li>
+								</ul>
+	</li>
+</ul>
+</td>
+							<td id="nst">8:05:29 pm NST</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="3" height="3"><img src="http://images.neopets.com/transparent_spacer.gif" width="1" height="3" alt="" border="0"></td>
+			</tr>
+		</table>
+	</div>
+
+	<div id="content">
+	<table width="100%" cellpadding="0" cellspacing="0" border="0">
+		<tr>
+<td align="center" class="sidebar" width="178">
+<div class="sidebarModule" style="margin-bottom: 7px;">
+	<table width="150" cellpadding="3" cellspacing="0" border="0" class="sidebarTable">
+		<tr>
+			<td valign="middle" class="sidebarHeader medText"><a href="/quickref.phtml"><b>Tester</b></a> </td>
+		</tr>
+		<tr>
+			<td class="activePet"><a href="/quickref.phtml"><IMG src="http://pets.neopets.com/cp/9zs53fzb/4/2.png" width="150" height="150" border="0" style=""></a></td>
+		</tr>
+		<tr>
+			<td class="activePet sf" align="center"><a href="/customise/?view=Tester"><b><span class="pointer">&raquo</span> Customise</b></a></td>
+		</tr>
+
+		<tr>
+			<td class="activePetInfo" align="center">
+				<table cellpadding="1" cellspacing="0" border="0">
+					<tr>
+						<td align="right">Species:</td>
+						<td align="left"><b>Shoyru</b></td>
+					</tr>
+
+					<tr>
+						<td align="right">Health:</td>
+						<td align="left"><b><font color='red'><b>0 / 10</b></font></b></td>
+					</tr>
+
+					<tr>
+						<td align="right">Mood:</td>
+						<td align="left"><b>joyful</b></td>
+					</tr>
+
+					<tr>
+						<td align="right">Hunger:</td>
+						<td align="left"><b><span style="color: #FF0000;">dying</span></b></td>
+					</tr>
+
+					<tr>
+						<td align="right">Age:</td>
+						<td align="left"><b>155 days</b></td>
+						</tr>
+
+					<tr>
+						<td align="right">Level:</td>
+						<td align="left"><b>1</b></td>
+					</tr>
+				</table>
+
+				
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="sidebarModule" style="margin-bottom: 7px;">
+	<table width="158" cellpadding="2" cellspacing="0" border="0" class="sidebarTable">
+		<tr>
+			<td valign="middle" class="sidebarHeader medText">Search Neopets</td>
+		</tr>
+		<tr>
+			<td class="neofriend" align="center">
+				<form onSubmit="search_handle(this);" style="padding-top: 4px; padding-bottom: 4px;">
+					<input class="sf" type="text" name="q" maxlength="255" value="Enter search text..." style="width: 135px; color: #a5a5a5; padding: 2px;" onFocus="this.style.color='#000000'; if( this.value=='Enter search text...' ) { this.value=''; }" onBlur="if( this.value=='' ) { this.style.color='#A5A5A5'; this.value='Enter search text...'; }"><br>
+					<input type="submit" value="Go!" class="sf">
+					<input type="hidden" name="client" value="pub-9208792519293771">
+					<input type="hidden" name="forid" value="1">
+					<input type="hidden" name="ie" value="ISO-8859-1">
+					<input type="hidden" name="oe" value="ISO-8859-1">
+					<input type="hidden" name="safe" value="active">
+					<input type="hidden" name="domains" value="www.neopets.com">
+					<input type="hidden" name="cof" value="GALT:#FFFFFF;GL:1;DIV:#000066;VLC:FFFFFF;AH:center;BGC:FFFFFF;LBGC:000066;ALC:FFFFFF;LC:FFFFFF;T:000000;GFNT:000066;GIMP:000077;FORID:1">
+					<input type="hidden" name="hl" value="en">
+					<input type="hidden" name="s">
+				</form>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div class="sidebarModule">
+	<table width="158" cellpadding="2" cellspacing="0" border="0" class="sidebarTable">
+		<tr>
+			<td valign="middle" class="sidebarHeader medText"><a href="/neofriends.phtml"><b>Neofriends</b></a> (Beta!) <a href="/s/index.phtml?track_cat_id=50&item_id=488"><img src="http://images.neopets.com/help/question_mark.png" width="13" height="13" alt="" border="0" align="absbottom"></a></td>
+		</tr>
+		<tr>
+			<td class="neofriend" align="center">
+
+<br />
+			None of your Neofriends are currently online.  You must be lonely.
+			<br /><br />			</td>
+		</tr>
+	</table>
+</div>
+</td>				<td class="content">
+										
+  <embed src="http://swf.neopets.com/flash_enabled_check.swf?mid=90670876448899230158195" quality="low" bgcolor="#ffffff" width="1" height="1" name="signup" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+
+  		<script name = 'JavaScript'>
+	    <!--
+	    var subcount = 0;
+	    function one_submit() {
+		    if (subcount == 0) {
+					subcount++;
+					return true;
+				} else {
+					return false;
+				}
+	    }
+	    //-->
+		</script>
+
+<script language='javascript'>
+<!--
+	function check_neopoints(amount, transaction) {
+		if(isNaN(amount) || amount <= 0) {
+			alert("This is not a valid amount!");
+			return false;
+		}
+		else {
+				if(transaction=='withdraw') {
+					if(! confirm("Are you sure you wish to withdraw " + amount + " NP?")) {
+						return false;
+					}
+				}
+				else if(transaction=='deposit') {
+					if(! confirm("Are you sure you wish to deposit " + amount + " NP?")) {
+						return false;
+					}
+				}
+		}
+		return true;
+	}
+//-->
+</script>
+
+
+<div align="center" class="medText">
+
+<a href="/objects.phtml"><b>Neopia Central</b></a>&nbsp;|
+<a href="/market_bazaar.phtml"><b>Bazaar</b></a>&nbsp;|
+<a href="/market_plaza.phtml"><b>Plaza</b></a>&nbsp;|
+<a href="/market_map.phtml"><b>Marketplace</b></a>&nbsp;|
+<a href="/market.phtml?type=wizard"><b>Shop Wizard</b></a>&nbsp;|
+<a href="/auctions.phtml"><b>Auctions</b></a>&nbsp;|
+<a href="/island/tradingpost.phtml"><b>Trading Post</b></a>
+<br />
+<a href="/objects.phtml?type=inventory"><b>Inventory</b></a>&nbsp;|
+<a href="/closet.phtml"><b>Closet</b></a>&nbsp;|
+<a href="/safetydeposit.phtml"><b>Safety Deposit Box</b></a>&nbsp;|
+<a href="/bank.phtml"><b>Bank</b></a>&nbsp;|
+<a href="/market.phtml?type=your"><b>Your Shop</b></a>
+<br />
+<a href="/battledome/battledome.phtml"><b>Battledome</b></a>&nbsp;|
+<a href="/guilds/index.phtml"><b>Guild Headquarters</b></a>&nbsp;|
+<a href="/noticeboard.phtml"><b>Notice Board</b></a>&nbsp;|
+<a href="/neohome/"><b>Neohomes</b></a>&nbsp;|
+<a href="/neohome/shed"><b>Storage Shed</b></a>
+
+
+<!--
+	<a href="/objects.phtml"><b>Neopia Central</b></a>&nbsp;|&nbsp;<a href="/market_bazaar.phtml"><b>Bazaar</b></a>&nbsp;|&nbsp;<a href="/market_plaza.phtml"><b>Plaza</b></a>&nbsp;|&nbsp;<a href="/market_map.phtml"><b>Marketplace</b></a>&nbsp;|&nbsp;<a href="/objects.phtml?type=inventory"><b>Inventory</b></a>&nbsp;|&nbsp;<a href="/closet.phtml"><b>Closet</b></a>&nbsp;|&nbsp;<a href="/safetydeposit.phtml"><b>Safety Deposit Box</b></a>
+
+	<br />
+
+	<a href="/battledome/battledome.phtml"><b>Battledome</b></a>&nbsp;|&nbsp;<a href="/guilds/index.phtml"><b>Guild Headquarters</b></a>&nbsp;|&nbsp;<a href="/noticeboard.phtml"><b>Notice Board</b></a>&nbsp;|&nbsp;<a href="/neohome/"><b>Neohomes</b></a>&nbsp;|&nbsp;<a href="/neohome/shed"><b>Storage Shed</b></a>
+	
+--->
+</div>
+
+
+
+
+<br />
+
+<b>The National Neopian Bank</b>
+<br /><br />
+Since any Neopoints you carry with you can be stolen by rabid Mutant Kadoaties or squandered away during a moment of weakness at <a href="/objects.phtml?type=shop&obj_type=2"><b>Kauvara's Magic Shop</b></a>, the National Neopian is here to keep those hard-earned Neopoints safe!  You can deposit or withdraw whenever you wish!  You can also earn interest on Neopoints you save, so saving is definitely a good thing.
+
+<br /><br />
+
+<div align="center">
+	<table width="100%" cellpadding="4" cellspacing="0" border="0">
+		<tr>
+			<td align="center">
+				<img src="http://images.neopets.com/new_shopkeepers/w1569.gif" width="300" height="150" alt="" border="0">
+			</td>
+			<td rowspan='2'>
+				<div id='ad-300x250Div-atfWrapper' class='ad_wrapper_fixed'>
+	<p>ADVERTISEMENT</p>
+	<div id='ad-300x250Div-atf'>
+				<script type='text/javascript' language='javascript'>
+			KIDS.ads.refresh.placeAd('ad-300x250Div-atf');
+		</script>
+			</div>
+</div>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" align="center">
+								<span style="font-size: 160%;"><b>Good evening, sir.</b></span><br />
+				It's great to see you again.  What can I do for you today?
+				<br><br>
+				<table cellpadding="3" cellspacing="0" border="0">
+					<tr>
+						<td style="font-weight: bold;">Account Type:</td>
+						<td align="center" style="background-color: #e4e4e4;">Millionaire Double Platinum</td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Current Balance:</td>
+						<td align="center" style="font-weight: bold;">2,075,334 NP</td>
+					</tr>
+					<tr>
+						<td style="font-weight: bold;">Interest Rate:</td>
+												<td align="center"><b>11.0%</b> per year</td>
+											</tr>
+					<tr>
+						<td style="font-weight: bold;">Yearly Interest:</td>
+												<td align="center" style="font-weight: bold;">228,286 NP</td>
+											</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<table width="100%" cellpadding="3" cellspacing="0" border="0">
+	<tr>
+		<td width="50%"><div class="contentModule" style="height: 100%">
+			<table cellpadding="3" cellspacing="0" border="0" class="contentModuleTable">
+				<tr>
+					<td class="contentModuleHeaderAlt"> <b>Deposit Neopoints</b></td>
+				</tr>
+
+				<tr>
+					<td align="left" valign="top" class="contentModuleContent">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td><div style="height:5em;">There is no limit to the amount of Neopoints you can deposit at once (except for the amount of Neopoints you actually have on hand, of course).</div></td>
+			</tr>
+
+			<tr>
+				<td valign="bottom"><div align="center" style="padding: 4px; background-color: #e4e4e4;">
+						<form action='process_bank.phtml' method='post' onSubmit="return check_neopoints(this.amount.value, 'deposit');">
+							<input type='hidden' name='type' value='deposit'>
+							<b>Amount:</b> <input type='text' name='amount' size=10 maxlength=10> <b>NP</b>&nbsp;&nbsp;<input type='submit' value='Deposit'>
+						</form>
+					</div>
+				</td>
+			</tr>
+		</table>
+					</td>
+				</tr></table>
+		</div></td>
+		<td width="50%"><div class="contentModule" style="height: 100%">
+			<table cellpadding="3" cellspacing="0" border="0" class="contentModuleTable">
+				<tr>
+					<td class="contentModuleHeaderAlt"> <b>Make a Withdrawal</b></td>
+				</tr>
+
+				<tr>
+					<td align="left" valign="top" class="contentModuleContent">
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr><form action='process_bank.phtml' method='post' onSubmit="return check_neopoints(this.amount.value, 'withdraw');">
+				<td><div style="height:5em;">If you withdraw Neopoints too many times a day, the bank staff may get angry and refuse to serve you! Withdraw wisely.</div></td>
+			</tr>
+
+			<tr>
+				<td valign="bottom">
+					<input type='hidden' name='type' value='withdraw'><div align="center" style="padding: 4px; background-color: #e4e4e4;">
+				<b>Amount:</b> <input type='text' name='amount' size=10 maxlength=10> <b>NP</b>&nbsp;&nbsp;<input type='submit' value='Withdraw'>
+			</div>
+		</form>
+				</td>
+			</tr>
+		</table>
+					</td>
+				</tr></table>
+		</div></td>
+	</tr>
+</table>
+<table width="100%" cellpadding="3" cellspacing="0" border="0">
+	<tr>
+		<td width="100%"><div class="contentModule" style="height: 100%">
+			<table cellpadding="3" cellspacing="0" border="0" class="contentModuleTable">
+				<tr>
+					<td class="contentModuleHeaderAlt"> <b>Collect Daily Interest</b></td>
+				</tr>
+
+				<tr>
+					<td align="left" valign="top" class="contentModuleContent">
+						Your current balance and interest rate allow you to gain <b>626 NP</b> per day (it's rounded up)! You will have to claim this yourself by clicking the <i>Collect Interest</i> button below.<br /><br /><div align="center" style="padding: 4px; background-color: #e4e4e4;">
+					You have already collected your interest today.
+				</div>
+					</td>
+				</tr></table>
+		</div></td>
+	</tr>
+</table>
+<table width="100%" cellpadding="3" cellspacing="0" border="0">
+	<tr>
+		<td width="100%"><div class="contentModule" style="height: 100%">
+			<table cellpadding="3" cellspacing="0" border="0" class="contentModuleTable">
+				<tr>
+					<td class="contentModuleHeaderAlt"> <b>Upgrade Your Account</b></td>
+				</tr>
+
+				<tr>
+					<td align="left" valign="top" class="contentModuleContent">
+						If you wish to upgrade your account to the next level, then you must meet the minimum balance required by the account.  Please select the type of account, meet the minimum additional deposit, and then click the <i>Change Account</i> button below.
+		<br /><br />
+		<form action='process_bank.phtml' method='post' onSubmit="return one_submit();">
+		<input type='hidden' name='type' value='upgrade'>
+		<table align=center cellspacing=0 cellpadding=3 border=0 style="border:1px solid black;">
+			<tr>
+				<td bgcolor='#e4e4e4'><b>Your Current Balance:</b></td>
+				<td bgcolor='#ffffff'><b>2,075,334 NP</b></td>
+			</tr>
+
+			<tr>
+				<td bgcolor='#e4e4e4'><b>New Account:</b></td>
+				<td bgcolor='#ffffff'><select name='account_type'>
+					<option selected>Select One<option value='0'>Junior Saver (min 0 NP)
+<option value='1'>Neopian Student (min 1,000 NP)
+<option value='2'>Bronze Saver (min 2,500 NP)
+<option value='3'>Silver Saver (min 5,000 NP)
+<option value='4'>Super Gold Plus (min 10,000 NP)
+<option value='5'>Platinum Extra (min 25,000 NP)
+<option value='6'>Double Platinum (min 50,000 NP)
+<option value='7'>Triple Platinum (min 75,000 NP)
+<option value='8'>Diamond Deposit (min 100,000 NP)
+<option value='9'>Diamond Deposit Plus (min 250,000 NP)
+<option value='10'>Diamond Deposit Gold (min 500,000 NP)
+<option value='11'>Millionaire Platinum (min 1,000,000 NP)
+<option value='12'>Millionaire Double Platinum (min 2,000,000 NP)
+<option value='13'>Millionaire Mega-Platinum (min 5,000,000 NP)
+<option value='14'>Neopian Mega-Riches (min 7,500,000 NP)
+<option value='15'>Ultimate Riches! (min 10,000,000 NP)
+</select></td>
+			</tr>
+
+			<tr>
+				<td bgcolor='#e4e4e4'><b>Additional Deposit:</b></td>
+				<td bgcolor='#ffffff'><input type='text' name='amount' size=10 maxlength=10> <b>NP</b></td>
+			</tr>
+		</table>
+
+		<br />
+
+		<div align="center" style="padding: 4px; background-color: #e4e4e4;">
+			<input type='submit' value='Change Account'>
+		</div>
+		</form>
+					</td>
+				</tr></table>
+		</div></td>
+	</tr>
+</table>
+
+<br />
+
+<table border='0' align='center' style='border-style: solid; border-width: 1px; border-color: black;'>
+<tr>
+<td><img src='http://images.neopets.com/pin/bank_pin_mgr.gif' border='0' width="80" height="80"></td>
+<td valign='top''>Need some extra security?<br><a href='/pin_prefs.phtml'><b>Add a PIN</b></a> for use in this area!</td>
+</tr></table>
+<br clear="all">
+
+									</td>
+			</tr>
+		</table>
+	</div>
+	<div id="footer">
+		<img src="http://images.neopets.com/themes/000_def_f65b1/rotations/13.png" width="200" height="170" alt="" border="0" class="footerNifty">
+		<table width="100%" cellpadding="0" cellspacing="0" border="0" class="footer">
+			<tr>
+				<td width="175" align="left"><a href="/index.phtml"><img src="http://images.neopets.com/transparent_spacer.gif" width="156" height="46" alt="Neopets.com" border="0"></a></td>
+				<td align="left"><br>
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<!-- Search -->
+							<td class="sf" valign="middle">
+								<form onSubmit="javascript: search_handle(this);">
+								<table cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td class="footerForm sf" valign="middle"><b>Search Neopets:</b>&nbsp;</td>
+										<td valign="middle"><input class="sf" type="text" name="q" size="25" maxlength="255" value="Enter search text..." style="color: #a5a5a5; padding: 2px;" onFocus="this.style.color='#000000'; if( this.value=='Enter search text...' ) { this.value=''; }" onBlur="if( this.value=='' ) { this.style.color='#A5A5A5'; this.value='Enter search text...'; }">&nbsp;</td>
+										<td valign="middle"><input type="submit" value="Go!" class="sf">
+										<input type="hidden" name="client" value="pub-9208792519293771">
+										<input type="hidden" name="forid" value="1">
+										<input type="hidden" name="ie" value="ISO-8859-1">
+										<input type="hidden" name="oe" value="ISO-8859-1">
+										<input type="hidden" name="safe" value="active">
+										<input type="hidden" name="domains" value="www.neopets.com">
+										<input type="hidden" name="cof" value="GALT:#FFFFFF;GL:1;DIV:#000066;VLC:FFFFFF;AH:center;BGC:FFFFFF;LBGC:000066;ALC:FFFFFF;LC:FFFFFF;T:000000;GFNT:000066;GIMP:000077;FORID:1">
+										<input type="hidden" name="hl" value="en">
+										<input type="hidden" name="s">
+										</td>
+									</tr>
+								</table>
+								</form>
+							</td>
+							<td width="15">&nbsp;</td>
+							<!-- Language -->
+							<td class="sf" valign="top">
+								<table cellpadding="0" cellspacing="0" border="0">
+									<tr>
+										<td class="footerForm sf" valign="middle"><form method="post"><b>Select Language:</b>&nbsp;</td>
+										<td valign="top">
+											<select name="lang" class="sf"><option value="en" selected>English</option><option value="nl">Nederlands</option><option value="pt">Português</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="it">Italiano</option><option value="es">Español</option><option value="ch">简体中文</option><option value="zh">繁體中文</option><option value="ja">日本語</option><option value="ko">한국어</option></select>&nbsp;</td>
+										<td valign="top"><input type="submit" value="Go!" class="sf"></form></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="copyright">
+					
+					<a href='/privacy.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/privacypolicy.png' width='81' height='18' border='0' alt='privacypolicy'></a>
+<img src='http://images.neopets.com/themes/000_def_f65b1/navigation/divider.png' width='4' height='16' border='0'>
+<a href='/safetytips.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/safetytips.png' width='61' height='18' border='0' alt='safetytips'></a>
+<img src='http://images.neopets.com/themes/000_def_f65b1/navigation/divider.png' width='4' height='16' border='0'>
+<a href='/contact.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/contactus.png' width='60' height='18' border='0' alt='contactus'></a>
+<img src='http://images.neopets.com/themes/000_def_f65b1/navigation/divider.png' width='4' height='16' border='0'>
+<a href='/aboutus.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/aboutus.png' width='50' height='18' border='0' alt='aboutus'></a>
+<img src='http://images.neopets.com/themes/000_def_f65b1/navigation/divider.png' width='4' height='16' border='0'>
+<a href='/refer/index.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/referral.png' width='98' height='18' border='0' alt='referral'></a>
+<img src='http://images.neopets.com/themes/000_def_f65b1/navigation/divider.png' width='4' height='16' border='0'>
+<a href='/help.phtml'><img src='http://images.neopets.com/themes/000_def_f65b1/navigation/help.png' width='25' height='18' border='0' alt='help'></a>
+<script type="text/javascript">
+<!--
+
+
+function setVisible(obj) {
+	obj = document.getElementById(obj);
+	obj.style.visibility = (obj.style.visibility == 'visible') ? 'hidden' : 'visible';
+	obj.style.zIndex = '9999';
+	document.getElementById('dimBackground').style.visibility = (document.getElementById('dimBackground').style.visibility == 'visible') ? 'hidden' : 'visible';
+    if(document.getElementById('fb-decoy') != null) {
+        document.getElementById('fb-decoy').style.zIndex = (document.getElementById('fb-decoy').style.zIndex == '9999') ? '-1' : '9999';
+    }
+
+    if(document.getElementById('kq-body-content') != null) {
+        document.getElementById('kq-body-content').style.visibility = (document.getElementById('kq-body-content').style.visibility == 'hidden') ? 'visible' : 'hidden';
+    }
+
+    if(document.getElementById('navigation') != null) {
+        document.getElementById('navigation').style.visibility = (document.getElementById('navigation').style.visibility == 'hidden') ? 'visible' : 'hidden';
+    }
+}
+
+
+function registerAutoBumper() {
+	jQuery('a.auto_bumper').click( function() {
+		window.auto_bumper_last = jQuery(this);
+		setVisible('auto_bumper');
+		return false;
+	});
+}
+
+function autoBumperGo() {
+	window.open(window.auto_bumper_last.attr('href'),'auto_bumper','width=800,height=800,resizable=yes,scrollbars=yes,toolbar=yes');
+	setVisible('auto_bumper', true);
+}
+
+if(typeof jQuery == 'undefined') {
+	window.onload = function(){
+		registerAutoBumper();
+	}
+}
+else {
+	jQuery(document).ready( function() { registerAutoBumper(); } );
+}
+
+
+
+if(document.getElementById('fb-decoy') != null) {
+    document.getElementById('fb-decoy').style.zIndex = '9999';
+}
+-->
+</script>
+<style type="text/css">
+.bumper {
+    position: fixed;
+    top:50%;
+    left:50%;
+    right:50%;
+    margin-top:-10%;
+    margin-left:-20%;
+    visibility: hidden;
+    background: url('http://images.neopets.com/help/bumper/bg.png');
+    width: 580px;
+    height: 300px;
+    padding: 20px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 9pt;
+    background-repeat: no-repeat;
+    z-index:9200;
+}
+
+.bumper p {
+	display:block;
+	position:absolute;
+	left:20px;
+	top:50px;
+	width:385px;
+	font-size:12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	margin:0px; 
+	padding:0px;
+}
+
+.bumper div, .bumper p {
+	color: black;
+}
+	
+#open {
+    position:absolute;
+    top:118px;
+	background: url('http://images.neopets.com/help/bumper/buttons/yes.png');
+	width: 177px;
+	height: 137px;
+	overflow:hidden;
+	text-align: center;
+	cursor: pointer
+}
+
+#close {
+    position:absolute;
+    top:118px;
+    left:220px;
+	background: url('http://images.neopets.com/help/bumper/buttons/no.png');
+	width: 177px;
+	height: 137px;
+	overflow:hidden;
+	cursor: pointer
+}
+
+#close:hover {
+   background: url('http://images.neopets.com/help/bumper/buttons/no.png') repeat 0 -137px;
+}
+
+#open:hover {
+   background: url('http://images.neopets.com/help/bumper/buttons/yes.png') repeat 0 -137px;
+} 
+
+#a:hover .close {
+    background: url('http://images.neopets.com/help/bumper/buttons/no.png') repeat 0 -137px;
+}
+
+#close-text {
+    position: absolute;
+top:68px;    left:7px;
+    width: 160px;
+    height:75px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+#open-text {
+    position: absolute;
+    top:68px;
+    left:7px;
+    width: 160px;
+    height:75px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 8pt;
+}
+
+#dimBackground {
+    position:fixed;
+	width: 100%;
+	height: 100%;
+	background: url(http://images.neopets.com/dark-semi-trans.png);
+	left: 0;
+	top: 0;
+	z-index: 998;
+    visibility:hidden;
+}
+
+#fb-decoy {
+    display:inline-block;
+    position:relative;
+    right:0px;
+    bottom:21px;
+    height:30px;
+    width:60px;
+    background-color:white;
+    z-index:9;
+}
+
+#fb-decoy a {
+    position:absolute;
+    top:0px;
+    left:0px;
+    height:20px;
+    width:45px;
+    background-image:url("http://images.neopets.com/np-facebook-like.png");
+    background-position:0px 0px;
+    background-repeat:no-repeat;
+    z-index:999999;
+}
+
+#fb-decoy a:hover {
+    text-align:left;
+    background-position:0px -20px;
+}
+
+.layer-msg {
+    display:inline;
+    position:absolute;
+    top:252px;
+    left:27px;
+    width:370px;
+}
+
+#facebook_games { 
+position:relative;
+display:inline-block; 
+top:-21px;
+left:115px;
+text-align:right; 
+width:144px;
+height:15px;
+}
+
+.fb_iframe_widget iframe {
+display:block;
+left:0px;
+}
+
+#facebook_games #fb-decoy {
+display:inline-block;
+left:-94px;
+width:46px;
+height:21px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){
+    #facebook_games #fb-decoy {
+        bottom:22px;
+        left:-98px;
+    }
+}
+
+#hab-main #facebook_games {
+float:left;
+text-align:right;
+height:25px;
+margin-top:2px;
+}
+
+#hab-main #facebook_games #fb-decoy {
+float:left;
+left:0px;
+}
+
+.fb-like-button #fb-decoy {
+display:block;
+height:21px;
+width:45px;
+}
+
+#hab-logo {
+clear:both;
+display:block;
+position:relative;
+right:2px;
+bottom:4px;
+}
+
+#gamesHeader #facebook_games {
+margin-left:0px;
+height:23px;
+top:2px;
+}
+
+#gamesHeader #fb-decoy {
+top:-35px;
+left:0px;
+float:left;
+height:21px;
+}
+
+.fb_edge_widget_with_comment span.fb_edge_comment_widget iframe.fb_ltr {
+display:none;
+}
+
+.connect_comment_widget .nub {
+display:none;
+}
+</style>
+<div id="dimBackground"></div>
+<div class="bumper" id="auto_bumper">
+    <img src="http://images.neopets.com/help/bumper/headers/leaving-neopia.png" alt="Heads Up! You're about to leave Neopia!" />
+    <br />
+    <p>You've clicked on a link that will take you outside of<BR> Neopets.com. We do not control your destination's website,<BR> so its rules, regulations, and Meepit defense systems will be<BR> different! Are you sure you'd like to continue?</p>
+    <br><br>
+    <div id="open" onclick="autoBumperGo()">
+        <div id="open-text">
+           It is a journey<BR>I must face...alone.<br>*dramatic music* 
+        </div>
+    </div>
+    <div id="close-hover" style="display: none;"></div>
+    <div id="close" onclick="javascript:setVisible('auto_bumper',true)">
+        <div id="close-text" >
+            I want to stay on Neopets,<BR>where the dangers of<br>Meepit invasion<br> are taken seriously.
+        </div>
+    </div></div><div class="bumper" id="layer1">
+    <img src="http://images.neopets.com/help/bumper/headers/leaving-neopia.png" alt="Heads Up! You're about to leave Neopia!" />
+    <br />
+    <p>You've clicked on a link that will take you outside of<BR> Neopets.com. We do not control your destination's website,<BR> so its rules, regulations, and Meepit defense systems will be<BR> different! Are you sure you'd like to continue?</p>
+    <br><br>
+    <div id="open" onclick="window.open('http://www.facebook.com/neopets','Facebook','width =800,height=800, resizable=yes,scrollbars=yes,toolbar=yes');location.href='javascript:setVisible(\'layer1\',true)'">
+        <div id="open-text">
+           It is a journey<BR>I must face...alone.<br>*dramatic music* 
+        </div>
+    </div>
+    <div id="close-hover" style="display: none;"></div>
+    <div id="close" onclick="location.href='javascript:setVisible(\'layer1\',true)'">
+        <div id="close-text" >
+            I want to stay on Neopets,<BR>where the dangers of<br>Meepit invasion<br> are taken seriously.
+        </div>
+    </div></div><div class="bumper" id="layer2">
+    <img src="http://images.neopets.com/help/bumper/headers/leaving-neopia.png" alt="Heads Up! You're about to leave Neopia!" />
+    <br />
+    <p>You've clicked on a link that will take you outside of<BR> Neopets.com. We do not control your destination's website,<BR> so its rules, regulations, and Meepit defense systems will be<BR> different! Are you sure you'd like to continue?</p>
+    <br><br>
+    <div id="open" onclick="document.getElementById('fb-decoy').style.visibility='hidden';location.href='javascript:setVisible(\'layer2\',true)'">
+        <div id="open-text">
+           It is a journey<BR>I must face...alone.<br>*dramatic music* 
+        </div>
+    </div>
+    <div id="close-hover" style="display: none;"></div>
+    <div id="close" onclick="location.href='javascript:setVisible(\'layer2\',true)'">
+        <div id="close-text" >
+            I want to stay on Neopets,<BR>where the dangers of<br>Meepit invasion<br> are taken seriously.
+        </div>
+    </div>
+                    <div class="layer-msg" style="clear:both;">
+                        <img src="http://images.neopets.com/help/bumper/headers/log-in-to-facebook.png" alt="/help/bumper/headers/log-in-to-facebook" />
+                    </div></div><div style='position:absolute;right:257px;top:52px;overflow:hidden;'><img src ='http://images.neopets.com/themes/000_def_f65b1/navigation/follow-us-on.png'><a href="http://www.facebook.com/neopets" target="_blank"><img src ='http://images.neopets.com/facebook-icon.png' border=0><a/></div><div style='position:absolute;right:257px;top:82px;overflow:hidden;'><a href="/prefs_fb.phtml"><img src="http://images.neopets.com/template/fb_connect/fb-connect.png" border="0"></a></div>					<br>
+					<div class='sf' style='width: 775px;'>
+						<img src='http://images.neopets.com/themes/000_def_f65b1/nvw.png' alt='Nickelodeon Virtual Worlds' title='Nickelodeon Virtual Worlds' align='top' hspace='5'  vspace='5' align='left'>
+<img src='http://images.neopets.com/comscore-gray.gif' vspace='5' width='99' height='32' alt='Nickelodeon Kids and Teens' title='Nickelodeon Kids and Teens'><br>
+						NEOPETS and all related indicia are trademarks of <a href="/aboutus.phtml"><b>Neopets, Inc.</b></a>, &copy; 1999-2013. &reg; denotes Reg. USPTO. All rights reserved. Use of this site signifies your acceptance of the <a href='/terms.phtml'><b>Terms of Use</b></a>.
+						
+						
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+<script language="JavaScript">
+function tzCook() { 
+	var today = new Date();
+	var expire = new Date();
+	expire.setTime(today.getTime() + 3600000*24*30);
+	var cstr = "_tz="+escape(today.getTimezoneOffset()) + ";expires="+expire.toGMTString() + ";path=/;domain=.neopets.com;";
+	document.cookie = cstr;
+}
+tzCook();
+</script>
+</div>
+<div style="display: none" id="logout_nchub"></div>
+<div style="display: none" id="logout_parature"></div>
+</body>
+</html>
