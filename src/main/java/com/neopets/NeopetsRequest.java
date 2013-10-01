@@ -11,9 +11,17 @@ public class NeopetsRequest {
 
   private HttpRequestBase httpRequest;
 
+  public NeopetsRequest(NeopetsURL url) {
+    this(url.toString());
+  }
+
   public NeopetsRequest(String url) {
     httpRequest = new HttpGet(url);
     setDefaultHeaders();
+  }
+
+  public NeopetsRequest(NeopetsURL url, String contents, ContentType contentType) {
+    this(url.toString(), contents, contentType);
   }
 
   public NeopetsRequest(String url, String contents, ContentType contentType) {
@@ -21,6 +29,10 @@ public class NeopetsRequest {
     post.setEntity(new StringEntity(contents, contentType));
     httpRequest = post;
     setDefaultHeaders();
+  }
+
+  public NeopetsRequest(NeopetsURL url, String contents) {
+    this(url.toString(), contents);
   }
 
   public NeopetsRequest(String url, String contents) {
