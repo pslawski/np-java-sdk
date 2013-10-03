@@ -1,19 +1,19 @@
 package com.neopets.services.bank.model.transform;
 
+import com.neopets.services.bank.model.GetBankRecordResult;
 import com.neopets.transform.AbstractPageUnmarshaller;
 import com.neopets.NeopetsParserException;
 import com.neopets.services.bank.model.BankRecord;
-import com.neopets.services.bank.model.BankRecordResults;
 import com.neopets.util.ParserUtils;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-public class BankRecordUnmarshaller extends AbstractPageUnmarshaller<BankRecordResults> {
+public class GetBankRecordResultUnmarshaller extends AbstractPageUnmarshaller<GetBankRecordResult> {
 
   @Override
-  public BankRecordResults unmarshall(Document document) {
-    BankRecordResults results = new BankRecordResults();
+  public GetBankRecordResult unmarshall(Document document) {
+    GetBankRecordResult results = new GetBankRecordResult();
 
     results.setPageStatus(unmarshallPageStatus(document));
     results.setBankRecord(unmarshallBankRecord(document));

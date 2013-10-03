@@ -2,7 +2,7 @@ package com.neopets.services.bank.model;
 
 import com.neopets.PageStatus;
 
-public class BankRecordResults {
+public class GetBankRecordResult {
 
   private PageStatus pageStatus;
   private BankRecord bankRecord;
@@ -11,7 +11,7 @@ public class BankRecordResults {
     return pageStatus;
   }
 
-  public BankRecordResults withPageStatus(PageStatus pageStatus) {
+  public GetBankRecordResult withPageStatus(PageStatus pageStatus) {
     this.pageStatus = pageStatus;
     return this;
   }
@@ -24,7 +24,7 @@ public class BankRecordResults {
     return bankRecord;
   }
 
-  public BankRecordResults withBankRecord(BankRecord bankRecord) {
+  public GetBankRecordResult withBankRecord(BankRecord bankRecord) {
     this.bankRecord = bankRecord;
     return this;
   }
@@ -36,9 +36,9 @@ public class BankRecordResults {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof BankRecordResults)) return false;
+    if (!(o instanceof GetBankRecordResult)) return false;
 
-    BankRecordResults that = (BankRecordResults) o;
+    GetBankRecordResult that = (GetBankRecordResult) o;
 
     if (bankRecord != null ? !bankRecord.equals(that.bankRecord) : that.bankRecord != null) return false;
     if (pageStatus != null ? !pageStatus.equals(that.pageStatus) : that.pageStatus != null) return false;
@@ -55,7 +55,7 @@ public class BankRecordResults {
 
   @Override
   public String toString() {
-    return "BankRecordResults{" +
+    return "GetBankRecordResult{" +
             "pageStatus=" + pageStatus +
             ", bankRecord=" + bankRecord +
             '}';

@@ -1,12 +1,12 @@
 package com.neopets.transform;
 
-import com.neopets.NeopetsPageResults;
+import com.neopets.NeopetsPageResult;
 import org.jsoup.nodes.Document;
 
-public class BasicPageUnmarshaller extends AbstractPageUnmarshaller<NeopetsPageResults> {
+public class BasicPageUnmarshaller extends AbstractPageUnmarshaller<NeopetsPageResult> {
 
-  public NeopetsPageResults unmarshall(Document document) {
-    NeopetsPageResults results = new NeopetsPageResults();
+  public NeopetsPageResult unmarshall(Document document) {
+    NeopetsPageResult results = new NeopetsPageResult();
     results.setPageStatus(unmarshallPageStatus(document));
     return results;
   }

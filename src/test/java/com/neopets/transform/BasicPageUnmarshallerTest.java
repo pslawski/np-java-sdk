@@ -1,6 +1,6 @@
 package com.neopets.transform;
 
-import com.neopets.NeopetsPageResults;
+import com.neopets.NeopetsPageResult;
 import com.neopets.PageStatus;
 import org.apache.commons.io.FileUtils;
 import org.jsoup.Jsoup;
@@ -19,9 +19,9 @@ public class BasicPageUnmarshallerTest {
     String html = FileUtils.readFileToString(new File(url.getFile()));
 
     BasicPageUnmarshaller unmarshaller = new BasicPageUnmarshaller();
-    NeopetsPageResults results = unmarshaller.unmarshall(Jsoup.parse(html));
+    NeopetsPageResult results = unmarshaller.unmarshall(Jsoup.parse(html));
 
-    NeopetsPageResults expected = new NeopetsPageResults()
+    NeopetsPageResult expected = new NeopetsPageResult()
             .withPageStatus(new PageStatus()
               .withNeopointsOnHand(31366));
 

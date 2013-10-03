@@ -3,7 +3,7 @@ import com.neopets.auth.NeopetsCredentialsProvider;
 import com.neopets.services.bank.NeopetsBank;
 import com.neopets.services.bank.NeopetsBankClient;
 import com.neopets.services.bank.model.BankRecord;
-import com.neopets.services.bank.model.BankRecordResults;
+import com.neopets.services.bank.model.GetBankRecordResult;
 
 public class NeopetsBankSample {
 
@@ -14,7 +14,7 @@ public class NeopetsBankSample {
     NeopetsCredentialsProvider provider = new ClasspathPropertiesFileCredentialsProvider(CREDENTIALS_PATH);
     NeopetsBank bank = new NeopetsBankClient(provider.getCredentials());
 
-    BankRecordResults results = bank.getBankRecord();
+    GetBankRecordResult results = bank.getBankRecord();
     BankRecord record = results.getBankRecord();
 
     displayBankRecordResults(results);
@@ -48,7 +48,7 @@ public class NeopetsBankSample {
     }
   }
 
-  private static void displayBankRecordResults(BankRecordResults results) {
+  private static void displayBankRecordResults(GetBankRecordResult results) {
     BankRecord bankRecord = results.getBankRecord();
 
     System.out.println("===========================================");

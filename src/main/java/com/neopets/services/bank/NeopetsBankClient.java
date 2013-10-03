@@ -3,11 +3,11 @@ package com.neopets.services.bank;
 import com.neopets.*;
 import com.neopets.auth.NeopetsCredentials;
 import com.neopets.services.bank.model.AlreadyClaimedInterestException;
-import com.neopets.services.bank.model.BankRecordResults;
+import com.neopets.services.bank.model.GetBankRecordResult;
 import com.neopets.services.bank.model.InvalidNeopointsAmountException;
 import com.neopets.services.bank.model.WithdrawalLimitException;
 import com.neopets.services.bank.model.handlers.AlreadyClaimedInterestExceptionHandler;
-import com.neopets.services.bank.model.transform.BankRecordUnmarshaller;
+import com.neopets.services.bank.model.transform.GetBankRecordResultUnmarshaller;
 import com.neopets.services.bank.model.handlers.InvalidNeopointsAmountExceptionHandler;
 import com.neopets.services.bank.model.handlers.WithdrawalLimitExceptionHandler;
 import com.neopets.transform.ErrorUnmarshaller;
@@ -21,9 +21,9 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public BankRecordResults getBankRecord() throws IOException {
+  public GetBankRecordResult getBankRecord() throws IOException {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.BANK);
-    return invoke(request, new BankRecordUnmarshaller());
+    return invoke(request, new GetBankRecordResultUnmarshaller());
   }
 
   @Override
