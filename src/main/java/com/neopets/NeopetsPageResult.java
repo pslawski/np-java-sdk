@@ -1,6 +1,6 @@
 package com.neopets;
 
-public class NeopetsPageResults {
+public class NeopetsPageResult {
 
   private PageStatus pageStatus;
 
@@ -8,7 +8,7 @@ public class NeopetsPageResults {
     return pageStatus;
   }
 
-  public NeopetsPageResults withPageStatus(PageStatus pageStatus) {
+  public NeopetsPageResult withPageStatus(PageStatus pageStatus) {
     this.pageStatus = pageStatus;
     return this;
   }
@@ -20,9 +20,9 @@ public class NeopetsPageResults {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof NeopetsPageResults)) return false;
+    if (!(o instanceof NeopetsPageResult)) return false;
 
-    NeopetsPageResults results = (NeopetsPageResults) o;
+    NeopetsPageResult results = (NeopetsPageResult) o;
 
     if (pageStatus != null ? !pageStatus.equals(results.pageStatus) : results.pageStatus != null) return false;
 
@@ -36,7 +36,7 @@ public class NeopetsPageResults {
 
   @Override
   public String toString() {
-    return "NeopetsPageResults{" +
+    return "NeopetsPageResult{" +
             "pageStatus=" + pageStatus +
             '}';
   }
