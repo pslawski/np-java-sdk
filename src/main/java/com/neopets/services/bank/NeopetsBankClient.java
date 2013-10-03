@@ -28,7 +28,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public void depositNeopoints(int neopoints) throws IOException {
+  public void depositNeopoints(int neopoints) throws IOException, InvalidNeopointsAmountException {
     if (neopoints <= 0) {
       throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
     }
@@ -47,7 +47,8 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public void withdrawNeopoints(int neopoints) throws IOException {
+  public void withdrawNeopoints(int neopoints) throws IOException, WithdrawalLimitException,
+          InvalidNeopointsAmountException {
     if (neopoints <= 0) {
       throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
     }
@@ -73,7 +74,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public void collectInterest() throws IOException {
+  public void collectInterest() throws IOException, AlreadyClaimedInterestException {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, "type=interest");
     request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();

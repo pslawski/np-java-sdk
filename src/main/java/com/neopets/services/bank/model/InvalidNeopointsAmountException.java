@@ -1,8 +1,8 @@
 package com.neopets.services.bank.model;
 
-import com.neopets.NeopetsClientException;
+import com.neopets.NeopetsServiceException;
 
-public class InvalidNeopointsAmountException extends NeopetsClientException {
+public class InvalidNeopointsAmountException extends NeopetsServiceException {
 
   public InvalidNeopointsAmountException(String message) {
     super(message);
