@@ -6,8 +6,11 @@ import com.neopets.services.bank.model.AlreadyClaimedInterestException;
 import com.neopets.services.bank.model.BankRecordResults;
 import com.neopets.services.bank.model.InvalidNeopointsAmountException;
 import com.neopets.services.bank.model.WithdrawalLimitException;
+import com.neopets.services.bank.model.handlers.AlreadyClaimedInterestExceptionHandler;
 import com.neopets.services.bank.model.transform.BankRecordUnmarshaller;
-import org.jsoup.Jsoup;
+import com.neopets.services.bank.model.handlers.InvalidNeopointsAmountExceptionHandler;
+import com.neopets.services.bank.model.handlers.WithdrawalLimitExceptionHandler;
+import com.neopets.transform.ErrorUnmarshaller;
 
 import java.io.IOException;
 
@@ -20,11 +23,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   @Override
   public BankRecordResults getBankRecord() throws IOException {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.BANK);
-
-    NeopetsResponse response = execute(request);
-
-    BankRecordUnmarshaller unmarshaller = new BankRecordUnmarshaller();
-    return unmarshaller.unmarshall(Jsoup.parse(response.getContents()));
+    return invoke(request, new BankRecordUnmarshaller());
   }
 
   @Override
@@ -38,12 +37,8 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
     request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();
 
-    NeopetsResponse response = execute(request);
-
-    NeopetsErrorResults results = new NeopetsErrorResults(response.getContents());
-    if (results.didErrorOccur()) {
-      throw new InvalidNeopointsAmountException(results.getErrorMessage());
-    }
+    invoke(request, new ErrorUnmarshaller())
+            .handle(new InvalidNeopointsAmountExceptionHandler());
   }
 
   @Override
@@ -58,19 +53,9 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
     request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();
 
-    NeopetsResponse response = execute(request);
-
-    NeopetsErrorResults results = new NeopetsErrorResults(response.getContents());
-    if (results.didErrorOccur()) {
-      String message = results.getErrorMessage();
-
-      if (message.contains("you have already attempted to withdraw")) {
-        throw new WithdrawalLimitException(message);
-      }
-      else {
-        throw new InvalidNeopointsAmountException(message);
-      }
-    }
+    invoke(request, new ErrorUnmarshaller())
+            .handle(new InvalidNeopointsAmountExceptionHandler())
+            .handle(new WithdrawalLimitExceptionHandler());
   }
 
   @Override
@@ -79,12 +64,8 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
     request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();
 
-    NeopetsResponse response = execute(request);
-
-    NeopetsErrorResults results = new NeopetsErrorResults(response.getContents());
-    if (results.didErrorOccur()) {
-      throw new AlreadyClaimedInterestException(results.getErrorMessage());
-    }
+    invoke(request, new ErrorUnmarshaller())
+            .handle(new AlreadyClaimedInterestExceptionHandler());
   }
 
 }

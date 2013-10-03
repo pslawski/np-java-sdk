@@ -1,7 +1,7 @@
-package com.neopets;
+package com.neopets.transform;
 
 import org.apache.commons.io.FileUtils;
-import org.junit.Before;
+import org.jsoup.Jsoup;
 import org.junit.Test;
 
 import java.io.File;
@@ -11,25 +11,22 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class NeopetsErrorResultsTest {
+public class ErrorMessageUnmarshallerTest {
 
   @Test
   public void testErrorResult() throws Exception {
     URL url = this.getClass().getResource("/html/deposit_error.html");
     String html = FileUtils.readFileToString(new File(url.getFile()));
 
-    NeopetsErrorResults results = new NeopetsErrorResults(html);
+    String errorMessage = new ErrorMessageUnmarshaller().unmarshall(Jsoup.parse(html));
 
-    assertTrue(results.didErrorOccur());
-    assertEquals("You do not have enough Neopoints on hand to deposit 1,000,000 NP!", results.getErrorMessage());
+    assertEquals("You do not have enough Neopoints on hand to deposit 1,000,000 NP!", errorMessage);
   }
 
   @Test
   public void testNoErrorResult() throws  Exception {
-    NeopetsErrorResults results = new NeopetsErrorResults("");
-
-    assertFalse(results.didErrorOccur());
-    assertEquals("", results.getErrorMessage());
+    String errorMessage = new ErrorMessageUnmarshaller().unmarshall(Jsoup.parse(""));
+    assertEquals(null, errorMessage);
   }
 
 }

@@ -2,6 +2,7 @@ package com.neopets;
 
 import java.io.IOException;
 
+import com.neopets.transform.Unmarshaller;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.params.HttpClientParams;
 import org.apache.http.impl.client.DecompressingHttpClient;
@@ -9,6 +10,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import com.neopets.auth.NeopetsCredentials;
 import com.neopets.NeopetsLoginException.LoginError;
+import org.jsoup.Jsoup;
 
 
 public abstract class NeopetsClient {
@@ -29,7 +31,12 @@ public abstract class NeopetsClient {
     HttpClientParams.setRedirecting(client.getParams(), false);
   }
 
-  protected NeopetsResponse execute(NeopetsRequest request) throws IOException {
+  protected <T> T invoke(NeopetsRequest request, Unmarshaller<T> unmarshaller) throws IOException {
+    NeopetsResponse response = execute(request);
+    return unmarshaller.unmarshall(Jsoup.parse(response.getContents()));
+  }
+
+  private NeopetsResponse execute(NeopetsRequest request) throws IOException {
     if (cookieJar != null) {
       client.setCookieStore(cookieJar.load());
     }
@@ -87,4 +94,5 @@ public abstract class NeopetsClient {
   public void setCookieJar(CookieJar cookieJar) {
     this.cookieJar = cookieJar;
   }
+
 }
