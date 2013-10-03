@@ -29,7 +29,7 @@ public class NeopetsBankSample {
       displayBankRecordResults(results);
     }
 
-    int toAdjust = results.getNeopointsOnHand() - DESIRED_NEOPOINTS_ON_HAND;
+    int toAdjust = results.getPageStatus().getNeopointsOnHand() - DESIRED_NEOPOINTS_ON_HAND;
 
     if (toAdjust > 0) {
       System.out.println("[[  Depositing " + toAdjust + "...  ]]");
@@ -52,7 +52,7 @@ public class NeopetsBankSample {
     BankRecord bankRecord = results.getBankRecord();
 
     System.out.println("===========================================");
-    System.out.println("On Hand: " + results.getNeopointsOnHand());
+    System.out.println("On Hand: " + results.getPageStatus().getNeopointsOnHand());
     System.out.println("Current Balance: " + bankRecord.getCurrentBalance());
     if (bankRecord.canCollectInterest()) {
       System.out.println("Can collect interest!");

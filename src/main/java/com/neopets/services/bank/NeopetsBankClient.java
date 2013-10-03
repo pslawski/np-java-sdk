@@ -6,6 +6,8 @@ import com.neopets.services.bank.model.AlreadyClaimedInterestException;
 import com.neopets.services.bank.model.BankRecordResults;
 import com.neopets.services.bank.model.InvalidNeopointsAmountException;
 import com.neopets.services.bank.model.WithdrawalLimitException;
+import com.neopets.services.bank.model.transform.BankRecordUnmarshaller;
+import org.jsoup.Jsoup;
 
 import java.io.IOException;
 
@@ -21,7 +23,8 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
     NeopetsResponse response = execute(request);
 
-    return new BankRecordResults(response.getContents());
+    BankRecordUnmarshaller unmarshaller = new BankRecordUnmarshaller();
+    return unmarshaller.unmarshall(Jsoup.parse(response.getContents()));
   }
 
   @Override

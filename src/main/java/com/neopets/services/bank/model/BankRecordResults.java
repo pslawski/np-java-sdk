@@ -1,38 +1,64 @@
 package com.neopets.services.bank.model;
 
-import com.neopets.NeopetsPageResults;
-import com.neopets.NeopetsParserException;
-import com.neopets.util.ParserUtils;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import com.neopets.PageStatus;
 
-public class BankRecordResults extends NeopetsPageResults {
+public class BankRecordResults {
 
+  private PageStatus pageStatus;
   private BankRecord bankRecord;
 
-  public BankRecordResults(String responseContents) throws NeopetsParserException {
-    super(responseContents);
-    int currentBalance = parseCurrentBalance();
-    boolean collectInterest = parseInterestCollected();
-    bankRecord = new BankRecord(currentBalance, collectInterest);
+  public PageStatus getPageStatus() {
+    return pageStatus;
   }
 
-  private int parseCurrentBalance() throws NeopetsParserException {
-    Elements elements = document.select("td:matchesOwn(Current Balance:)");
-    if (elements.size() != 1) {
-      throw new NeopetsParserException("Could not parse the current balance.");
-    }
-    Element currentBalanceElement = elements.get(0).nextElementSibling();
-    return ParserUtils.parseNeopoints(currentBalanceElement.text());
+  public BankRecordResults withPageStatus(PageStatus pageStatus) {
+    this.pageStatus = pageStatus;
+    return this;
   }
 
-  private boolean parseInterestCollected() {
-    Elements elements = document.select("input[type=submit][value^=Collect Interest]");
-    return elements.size() == 1;
+  public void setPageStatus(PageStatus pageStatus) {
+    this.pageStatus = pageStatus;
   }
 
   public BankRecord getBankRecord() {
     return bankRecord;
+  }
+
+  public BankRecordResults withBankRecord(BankRecord bankRecord) {
+    this.bankRecord = bankRecord;
+    return this;
+  }
+
+  public void setBankRecord(BankRecord bankRecord) {
+    this.bankRecord = bankRecord;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof BankRecordResults)) return false;
+
+    BankRecordResults that = (BankRecordResults) o;
+
+    if (bankRecord != null ? !bankRecord.equals(that.bankRecord) : that.bankRecord != null) return false;
+    if (pageStatus != null ? !pageStatus.equals(that.pageStatus) : that.pageStatus != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = pageStatus != null ? pageStatus.hashCode() : 0;
+    result = 31 * result + (bankRecord != null ? bankRecord.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "BankRecordResults{" +
+            "pageStatus=" + pageStatus +
+            ", bankRecord=" + bankRecord +
+            '}';
   }
 
 }

@@ -1,29 +1,44 @@
 package com.neopets;
 
-
-import com.neopets.util.ParserUtils;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-
 public class NeopetsPageResults {
-  protected Document document;
-  private int neopointsOnHand;
 
-  public NeopetsPageResults(String responseContents) {
-    document = Jsoup.parse(responseContents);
-    neopointsOnHand = parseNeopointsOnHand();
+  private PageStatus pageStatus;
+
+  public PageStatus getPageStatus() {
+    return pageStatus;
   }
 
-  private int parseNeopointsOnHand() {
-    Elements elements = document.select("a[id=npanchor][href$=inventory.phtml]");
-    if (elements.size() != 1) {
-      throw new NeopetsParserException("Could not parse Neopoints on hand.");
-    }
-    return ParserUtils.parseNeopoints(elements.get(0).text());
+  public NeopetsPageResults withPageStatus(PageStatus pageStatus) {
+    this.pageStatus = pageStatus;
+    return this;
   }
 
-  public int getNeopointsOnHand() {
-    return neopointsOnHand;
+  public void setPageStatus(PageStatus pageStatus) {
+    this.pageStatus = pageStatus;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof NeopetsPageResults)) return false;
+
+    NeopetsPageResults results = (NeopetsPageResults) o;
+
+    if (pageStatus != null ? !pageStatus.equals(results.pageStatus) : results.pageStatus != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    return pageStatus != null ? pageStatus.hashCode() : 0;
+  }
+
+  @Override
+  public String toString() {
+    return "NeopetsPageResults{" +
+            "pageStatus=" + pageStatus +
+            '}';
+  }
+
 }
