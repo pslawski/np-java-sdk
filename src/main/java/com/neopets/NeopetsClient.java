@@ -98,7 +98,7 @@ public abstract class NeopetsClient {
         return;
       }
       if (location.contains("badpassword")) {
-        request = new NeopetsRequest("http://www.neopets.com/" + location);
+        request = new NeopetsRequest(NeopetsURL.formURL(location));
         request.setReferer(NeopetsURL.INDEX.toString());
         request.setToNotBeCached();
         response = send(request);

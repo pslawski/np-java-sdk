@@ -20,12 +20,16 @@ public enum NeopetsURL {
     return path;
   }
 
-  public String toString() {
+  public static String formURL(String path) {
     if (path.isEmpty()) {
       return BASE_URL;
     } else {
       return BASE_URL + "/" + path;
     }
+  }
+
+  public String toString() {
+    return formURL(path);
   }
 
 }
