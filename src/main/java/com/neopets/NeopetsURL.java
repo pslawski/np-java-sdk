@@ -3,8 +3,12 @@ package com.neopets;
 public enum NeopetsURL {
 
   HOME(""),
-  BANK("/bank.phtml"),
-  PROCESS_BANK("/process_bank.phtml");
+  INDEX("index.phtml"),
+  LOGIN("login.phtml"),
+  BANK("bank.phtml"),
+  PROCESS_BANK("process_bank.phtml");
+
+  private static final String BASE_URL = "http://www.neopets.com";
 
   private String path;
 
@@ -12,8 +16,16 @@ public enum NeopetsURL {
     this.path = path;
   }
 
+  public String getPath() {
+    return path;
+  }
+
   public String toString() {
-    return "http://www.neopets.com" + path;
+    if (path.isEmpty()) {
+      return BASE_URL;
+    } else {
+      return BASE_URL + "/" + path;
+    }
   }
 
 }

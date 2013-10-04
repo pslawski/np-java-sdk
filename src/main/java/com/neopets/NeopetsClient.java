@@ -86,20 +86,20 @@ public abstract class NeopetsClient {
     String data = "destination=%252Findex.phtml&username=" + credentials.getUsername() +
                   "&password=" + credentials.getPassword();
 
-    NeopetsRequest request = new NeopetsRequest("http://www.neopets.com/login.phtml", data);
-    request.setReferer("http://www.neopets.com/index.phtml");
-    request.setOrigin("http://www.neopets.com");
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, data);
+    request.setReferer(NeopetsURL.INDEX.toString());
+    request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();
     NeopetsResponse response = send(request);
 
     if (response.gotRedirected()) {
       String location = response.getRedirectedLocation();
-      if (location.contains("index.phtml")) {
+      if (location.contains(NeopetsURL.INDEX.getPath())) {
         return;
       }
       if (location.contains("badpassword")) {
         request = new NeopetsRequest("http://www.neopets.com/" + location);
-        request.setReferer("http://www.neopets.com/index.phtml");
+        request.setReferer(NeopetsURL.INDEX.toString());
         request.setToNotBeCached();
         response = send(request);
       }
