@@ -78,7 +78,7 @@ public abstract class NeopetsClient {
       return new NeopetsResponse(httpResponse);
     }
     catch (IOException e) {
-      throw new NeopetsClientException(e.getMessage(), e);
+      throw new NeopetsClientException("Cannot send HTTP request: " + e.getMessage(), e);
     }
   }
 
