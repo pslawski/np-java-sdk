@@ -32,7 +32,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
     String data = "type=deposit&amount=" + neopoints;
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, data);
-    request.setOrigin(NeopetsURL.HOME.toString());
+    request.setOrigin(NeopetsURL.ROOT.toString());
     request.setToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())
@@ -47,7 +47,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
     String data = "type=withdraw&amount=" + neopoints;
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, data);
-    request.setOrigin(NeopetsURL.HOME.toString());
+    request.setOrigin(NeopetsURL.ROOT.toString());
     request.setToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())
@@ -58,7 +58,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   @Override
   public void collectInterest() throws AlreadyClaimedInterestException {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, "type=interest");
-    request.setOrigin(NeopetsURL.HOME.toString());
+    request.setOrigin(NeopetsURL.ROOT.toString());
     request.setToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())

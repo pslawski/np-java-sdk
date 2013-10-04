@@ -2,7 +2,7 @@ package com.neopets;
 
 public enum NeopetsURL {
 
-  HOME(""),
+  ROOT(""),
   INDEX("index.phtml"),
   LOGIN("login.phtml"),
   BANK("bank.phtml"),

@@ -88,7 +88,7 @@ public abstract class NeopetsClient {
 
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, data);
     request.setReferer(NeopetsURL.INDEX.toString());
-    request.setOrigin(NeopetsURL.HOME.toString());
+    request.setOrigin(NeopetsURL.ROOT.toString());
     request.setToNotBeCached();
     NeopetsResponse response = send(request);
 
