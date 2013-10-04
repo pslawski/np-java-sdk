@@ -5,17 +5,15 @@ import com.neopets.services.bank.model.GetBankRecordResult;
 import com.neopets.services.bank.model.InvalidNeopointsAmountException;
 import com.neopets.services.bank.model.WithdrawalLimitException;
 
-import java.io.IOException;
-
 public interface NeopetsBank {
 
-  public GetBankRecordResult getBankRecord() throws IOException;
+  public GetBankRecordResult getBankRecord();
 
-  public void depositNeopoints(int neopoints) throws IOException, InvalidNeopointsAmountException;
+  public void depositNeopoints(int neopoints) throws InvalidNeopointsAmountException;
 
-  public void withdrawNeopoints(int neopoints) throws IOException, WithdrawalLimitException, InvalidNeopointsAmountException;
+  public void withdrawNeopoints(int neopoints) throws InvalidNeopointsAmountException, WithdrawalLimitException;
 
-  public void collectInterest() throws IOException, AlreadyClaimedInterestException;
+  public void collectInterest() throws AlreadyClaimedInterestException;
 
 }
 

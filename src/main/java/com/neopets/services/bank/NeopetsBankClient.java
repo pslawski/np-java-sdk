@@ -12,22 +12,20 @@ import com.neopets.services.bank.model.handlers.InvalidNeopointsAmountExceptionH
 import com.neopets.services.bank.model.handlers.WithdrawalLimitExceptionHandler;
 import com.neopets.transform.ErrorUnmarshaller;
 
-import java.io.IOException;
-
 public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
-  public NeopetsBankClient(NeopetsCredentials credentials) throws IOException {
+  public NeopetsBankClient(NeopetsCredentials credentials) {
     super(credentials);
   }
 
   @Override
-  public GetBankRecordResult getBankRecord() throws IOException {
+  public GetBankRecordResult getBankRecord() {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.BANK);
     return invoke(request, new GetBankRecordResultUnmarshaller());
   }
 
   @Override
-  public void depositNeopoints(int neopoints) throws IOException, InvalidNeopointsAmountException {
+  public void depositNeopoints(int neopoints) throws InvalidNeopointsAmountException {
     if (neopoints <= 0) {
       throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
     }
@@ -42,8 +40,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public void withdrawNeopoints(int neopoints) throws IOException, WithdrawalLimitException,
-          InvalidNeopointsAmountException {
+  public void withdrawNeopoints(int neopoints) throws InvalidNeopointsAmountException, WithdrawalLimitException {
     if (neopoints <= 0) {
       throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
     }
@@ -59,7 +56,7 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
   }
 
   @Override
-  public void collectInterest() throws IOException, AlreadyClaimedInterestException {
+  public void collectInterest() throws AlreadyClaimedInterestException {
     NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, "type=interest");
     request.setOrigin(NeopetsURL.HOME.toString());
     request.setToNotBeCached();

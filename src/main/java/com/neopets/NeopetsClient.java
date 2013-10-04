@@ -19,11 +19,11 @@ public abstract class NeopetsClient {
   private CookieJar cookieJar;
   private DefaultHttpClient client;
 
-  public NeopetsClient(NeopetsCredentials credentials) throws IOException {
+  public NeopetsClient(NeopetsCredentials credentials) {
     this(credentials, null);
   }
 
-  public NeopetsClient(NeopetsCredentials credentials, CookieJar cookieJar) throws IOException {
+  public NeopetsClient(NeopetsCredentials credentials, CookieJar cookieJar) {
     this.credentials = credentials;
     this.cookieJar = cookieJar;
 
@@ -31,25 +31,45 @@ public abstract class NeopetsClient {
     HttpClientParams.setRedirecting(client.getParams(), false);
   }
 
-  protected <T> T invoke(NeopetsRequest request, Unmarshaller<T> unmarshaller) throws IOException {
+  protected <T> T invoke(NeopetsRequest request, Unmarshaller<T> unmarshaller) {
     NeopetsResponse response = execute(request);
     return unmarshaller.unmarshall(Jsoup.parse(response.getContents()));
   }
 
-  private NeopetsResponse execute(NeopetsRequest request) throws IOException {
-    if (cookieJar != null) {
-      client.setCookieStore(cookieJar.load());
-    }
+  private NeopetsResponse execute(NeopetsRequest request) {
+    loadCookies();
     NeopetsResponse response = send(request);
     if (response.requiresLogin()) {
       login();
       response = send(request);
     }
-    if (cookieJar != null) {
-      cookieJar.save(client.getCookieStore());
-    }
+    storeCookies();
+
     return response;
   }
+
+  private void loadCookies() {
+    try {
+      if (cookieJar != null) {
+        client.setCookieStore(cookieJar.load());
+      }
+    }
+    catch (IOException e) {
+      throw new NeopetsClientException("Cannot load cookies from the Cookie Jar: " + e.getMessage(), e);
+    }
+  }
+
+  private void storeCookies() {
+    try {
+      if (cookieJar != null) {
+        cookieJar.save(client.getCookieStore());
+      }
+    }
+    catch (IOException e) {
+      throw new NeopetsClientException("Cannot store cookies from the Cookie Jar: " + e.getMessage(), e);
+    }
+  }
+
 
   private NeopetsResponse send(NeopetsRequest request) {
     DecompressingHttpClient decompressingClient = new DecompressingHttpClient(client);
