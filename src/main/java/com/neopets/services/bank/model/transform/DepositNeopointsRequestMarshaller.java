@@ -5,9 +5,6 @@ import com.neopets.NeopetsURL;
 import com.neopets.services.bank.model.DepositNeopointsRequest;
 import com.neopets.transform.Marshaller;
 import com.neopets.util.ParametersBuilder;
-import org.apache.http.NameValuePair;
-
-import java.util.List;
 
 public class DepositNeopointsRequestMarshaller implements Marshaller<DepositNeopointsRequest> {
 
@@ -15,12 +12,11 @@ public class DepositNeopointsRequestMarshaller implements Marshaller<DepositNeop
   public NeopetsRequest marshall(DepositNeopointsRequest in) {
     int neopoints = in.getNeopoints();
 
-    List<NameValuePair> parameters = new ParametersBuilder()
+    ParametersBuilder builder = new ParametersBuilder()
             .add("type", "deposit")
-            .add("amount", neopoints)
-            .getParameters();
+            .add("amount", neopoints);
 
-    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, builder)
             .withOrigin(NeopetsURL.ROOT.toString())
             .withToNotBeCached();
   }

@@ -1,5 +1,6 @@
 package com.neopets;
 
+import com.neopets.util.ParametersBuilder;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -24,6 +25,10 @@ public class NeopetsRequest {
 
   public NeopetsRequest(NeopetsURL url, String contents, ContentType contentType) {
     this(url, new StringEntity(contents, contentType));
+  }
+
+  public NeopetsRequest(NeopetsURL url, ParametersBuilder builder) {
+    this(url, builder.getParameters());
   }
 
   public NeopetsRequest(NeopetsURL url, List<NameValuePair> parameters) {

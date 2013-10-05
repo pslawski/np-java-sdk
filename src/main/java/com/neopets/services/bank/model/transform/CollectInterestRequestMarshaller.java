@@ -5,19 +5,15 @@ import com.neopets.NeopetsURL;
 import com.neopets.services.bank.model.CollectInterestRequest;
 import com.neopets.transform.Marshaller;
 import com.neopets.util.ParametersBuilder;
-import org.apache.http.NameValuePair;
-
-import java.util.List;
 
 public class CollectInterestRequestMarshaller implements Marshaller<CollectInterestRequest> {
 
   @Override
   public NeopetsRequest marshall(CollectInterestRequest in) {
-    List<NameValuePair> parameters = new ParametersBuilder()
-            .add("type", "interest")
-            .getParameters();
+    ParametersBuilder builder = new ParametersBuilder()
+            .add("type", "interest");
 
-    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, builder)
             .withOrigin(NeopetsURL.ROOT.toString())
             .withToNotBeCached();
   }

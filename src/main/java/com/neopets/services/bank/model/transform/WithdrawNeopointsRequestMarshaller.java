@@ -5,9 +5,6 @@ import com.neopets.NeopetsURL;
 import com.neopets.services.bank.model.WithdrawNeopointsRequest;
 import com.neopets.transform.Marshaller;
 import com.neopets.util.ParametersBuilder;
-import org.apache.http.NameValuePair;
-
-import java.util.List;
 
 public class WithdrawNeopointsRequestMarshaller implements Marshaller<WithdrawNeopointsRequest> {
 
@@ -15,12 +12,11 @@ public class WithdrawNeopointsRequestMarshaller implements Marshaller<WithdrawNe
   public NeopetsRequest marshall(WithdrawNeopointsRequest in) {
     int neopoints = in.getNeopoints();
 
-    List<NameValuePair> parameters = new ParametersBuilder()
+    ParametersBuilder builder = new ParametersBuilder()
             .add("type", "withdraw")
-            .add("amount", neopoints)
-            .getParameters();
+            .add("amount", neopoints);
 
-    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+    return new NeopetsRequest(NeopetsURL.PROCESS_BANK, builder)
             .withOrigin(NeopetsURL.ROOT.toString())
             .withToNotBeCached();
   }

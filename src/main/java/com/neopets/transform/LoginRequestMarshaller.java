@@ -5,9 +5,6 @@ import com.neopets.NeopetsRequest;
 import com.neopets.NeopetsURL;
 import com.neopets.auth.NeopetsCredentials;
 import com.neopets.util.ParametersBuilder;
-import org.apache.http.NameValuePair;
-
-import java.util.List;
 
 public class LoginRequestMarshaller implements Marshaller<LoginRequest> {
 
@@ -17,13 +14,12 @@ public class LoginRequestMarshaller implements Marshaller<LoginRequest> {
     NeopetsCredentials credentials = in.getCredentials();
     NeopetsURL url = in.getUrl();
 
-    List<NameValuePair> parameters = new ParametersBuilder()
+    ParametersBuilder builder = new ParametersBuilder()
             .add("destination", "/" + url.getPath())
             .add("username", credentials.getUsername())
-            .add("password", credentials.getPassword())
-            .getParameters();
+            .add("password", credentials.getPassword());
 
-    return new NeopetsRequest(NeopetsURL.LOGIN, parameters)
+    return new NeopetsRequest(NeopetsURL.LOGIN, builder)
             .withReferer(url.toString())
             .withOrigin(NeopetsURL.ROOT.toString())
             .withToNotBeCached();
