@@ -3,18 +3,20 @@ package com.neopets.services.bank;
 import com.neopets.*;
 import com.neopets.auth.NeopetsCredentials;
 import com.neopets.services.bank.model.AlreadyClaimedInterestException;
+import com.neopets.services.bank.model.CollectInterestRequest;
+import com.neopets.services.bank.model.DepositNeopointsRequest;
 import com.neopets.services.bank.model.GetBankRecordResult;
 import com.neopets.services.bank.model.InvalidNeopointsAmountException;
+import com.neopets.services.bank.model.WithdrawNeopointsRequest;
 import com.neopets.services.bank.model.WithdrawalLimitException;
 import com.neopets.services.bank.model.handlers.AlreadyClaimedInterestExceptionHandler;
+import com.neopets.services.bank.model.transform.CollectInterestRequestMarshaller;
+import com.neopets.services.bank.model.transform.DepositNeopointsRequestMarshaller;
 import com.neopets.services.bank.model.transform.GetBankRecordResultUnmarshaller;
 import com.neopets.services.bank.model.handlers.InvalidNeopointsAmountExceptionHandler;
 import com.neopets.services.bank.model.handlers.WithdrawalLimitExceptionHandler;
+import com.neopets.services.bank.model.transform.WithdrawNeopointsRequestMarshaller;
 import com.neopets.transform.ErrorUnmarshaller;
-import com.neopets.util.ParametersBuilder;
-import org.apache.http.NameValuePair;
-
-import java.util.List;
 
 public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
@@ -30,38 +32,23 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
   @Override
   public void depositNeopoints(int neopoints) throws InvalidNeopointsAmountException {
-    if (neopoints <= 0) {
-      throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
-    }
+    depositNeopoints(new DepositNeopointsRequest(neopoints));
+  }
 
-    List<NameValuePair> parameters = new ParametersBuilder()
-            .add("type", "deposit")
-            .add("amount", neopoints)
-            .getParameters();
-
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
-            .withOrigin(NeopetsURL.ROOT.toString())
-            .withToNotBeCached();
-
+  public void depositNeopoints(DepositNeopointsRequest originalRequest) throws InvalidNeopointsAmountException {
+    NeopetsRequest request = new DepositNeopointsRequestMarshaller().marshall(originalRequest);
     invoke(request, new ErrorUnmarshaller())
             .handle(new InvalidNeopointsAmountExceptionHandler());
   }
 
   @Override
   public void withdrawNeopoints(int neopoints) throws InvalidNeopointsAmountException, WithdrawalLimitException {
-    if (neopoints <= 0) {
-      throw new IllegalArgumentException("Neopoints cannot be less than or equal to zero.");
-    }
+    withdrawNeopoints(new WithdrawNeopointsRequest(neopoints));
+  }
 
-    List<NameValuePair> parameters = new ParametersBuilder()
-            .add("type", "withdraw")
-            .add("amount", neopoints)
-            .getParameters();
-
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
-            .withOrigin(NeopetsURL.ROOT.toString())
-            .withToNotBeCached();
-
+  public void withdrawNeopoints(WithdrawNeopointsRequest originalRequest)
+          throws InvalidNeopointsAmountException, WithdrawalLimitException {
+    NeopetsRequest request = new WithdrawNeopointsRequestMarshaller().marshall(originalRequest);
     invoke(request, new ErrorUnmarshaller())
             .handle(new InvalidNeopointsAmountExceptionHandler())
             .handle(new WithdrawalLimitExceptionHandler());
@@ -69,15 +56,11 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
 
   @Override
   public void collectInterest() throws AlreadyClaimedInterestException {
+    collectInterest(new CollectInterestRequest());
+  }
 
-    List<NameValuePair> parameters = new ParametersBuilder()
-            .add("type", "interest")
-            .getParameters();
-
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
-            .withOrigin(NeopetsURL.ROOT.toString())
-            .withToNotBeCached();
-
+  public void collectInterest(CollectInterestRequest originalRequest) throws AlreadyClaimedInterestException {
+    NeopetsRequest request= new CollectInterestRequestMarshaller().marshall(originalRequest);
     invoke(request, new ErrorUnmarshaller())
             .handle(new AlreadyClaimedInterestExceptionHandler());
   }
