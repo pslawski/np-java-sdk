@@ -17,6 +17,9 @@ public enum NeopetsURL {
   }
 
   public String getPath() {
+    if (path.isEmpty()) {
+      return INDEX.getPath();
+    }
     return path;
   }
 
