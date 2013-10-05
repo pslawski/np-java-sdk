@@ -2,6 +2,7 @@ package com.neopets;
 
 import java.io.IOException;
 
+import com.neopets.transform.LoginRequestMarshaller;
 import com.neopets.transform.Unmarshaller;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.params.HttpClientParams;
@@ -83,13 +84,7 @@ public abstract class NeopetsClient {
   }
 
   private void login() {
-    String data = "destination=%252Findex.phtml&username=" + credentials.getUsername() +
-                  "&password=" + credentials.getPassword();
-
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, data);
-    request.setReferer(NeopetsURL.INDEX.toString());
-    request.setOrigin(NeopetsURL.ROOT.toString());
-    request.setToNotBeCached();
+    NeopetsRequest request = new LoginRequestMarshaller().marshall(new LoginRequest(NeopetsURL.INDEX, credentials));
     NeopetsResponse response = send(request);
 
     if (response.gotRedirected()) {
