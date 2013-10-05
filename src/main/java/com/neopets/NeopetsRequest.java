@@ -1,10 +1,16 @@
 package com.neopets;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
+
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 
 public class NeopetsRequest {
@@ -24,19 +30,32 @@ public class NeopetsRequest {
     this(url.toString(), contents, contentType);
   }
 
+
   public NeopetsRequest(String url, String contents, ContentType contentType) {
+    this(url, new StringEntity(contents, contentType));
+  }
+
+  public NeopetsRequest(NeopetsURL url, List<NameValuePair> parameters) {
+    this(url.toString(), parameters);
+  }
+
+  public NeopetsRequest(String url, List<NameValuePair> parameters) {
+    this(url, newUrlEncodedFormEntity(parameters));
+  }
+
+  public NeopetsRequest(String url, HttpEntity entity) {
     HttpPost post = new HttpPost(url);
-    post.setEntity(new StringEntity(contents, contentType));
+    post.setEntity(entity);
     httpRequest = post;
     setDefaultHeaders();
   }
 
-  public NeopetsRequest(NeopetsURL url, String contents) {
-    this(url.toString(), contents);
-  }
-
-  public NeopetsRequest(String url, String contents) {
-    this(url, contents, ContentType.APPLICATION_FORM_URLENCODED);
+  private static HttpEntity newUrlEncodedFormEntity(List<NameValuePair> parameters) {
+    try {
+      return new UrlEncodedFormEntity(parameters, "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+      throw new NeopetsClientException("Cannot create request: " + e.getMessage(), e);
+    }
   }
 
   private void setDefaultHeaders() {

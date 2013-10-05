@@ -1,13 +1,13 @@
 package com.neopets.transform;
 
 import com.neopets.LoginRequest;
-import com.neopets.NeopetsClientException;
 import com.neopets.NeopetsRequest;
 import com.neopets.NeopetsURL;
 import com.neopets.auth.NeopetsCredentials;
+import com.neopets.util.ParametersBuilder;
+import org.apache.http.NameValuePair;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+import java.util.List;
 
 public class LoginRequestMarshaller implements Marshaller<LoginRequest> {
 
@@ -17,17 +17,13 @@ public class LoginRequestMarshaller implements Marshaller<LoginRequest> {
     NeopetsCredentials credentials = in.getCredentials();
     NeopetsURL url = in.getUrl();
 
-    String destination;
-    try {
-        destination = URLEncoder.encode(URLEncoder.encode("/" + url.getPath(), "UTF-8"), "UTF-8");
-    } catch (UnsupportedEncodingException e) {
-      throw new NeopetsClientException("Cannot marshal login request: " + e.getMessage(), e);
-    }
+    List<NameValuePair> parameters = new ParametersBuilder()
+           .add("destination", "/" + url.getPath())
+           .add("username", credentials.getUsername())
+           .add("password", credentials.getPassword())
+           .getParameters();
 
-    String data = "destination=%252F" + destination + "&username=" + credentials.getUsername() +
-            "&password=" + credentials.getPassword();
-
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, data);
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, parameters);
     request.setReferer(url.toString());
     request.setOrigin(NeopetsURL.ROOT.toString());
     request.setToNotBeCached();
