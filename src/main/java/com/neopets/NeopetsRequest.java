@@ -18,33 +18,20 @@ public class NeopetsRequest {
   private HttpRequestBase httpRequest;
 
   public NeopetsRequest(NeopetsURL url) {
-    this(url.toString());
-  }
-
-  public NeopetsRequest(String url) {
-    httpRequest = new HttpGet(url);
+    httpRequest = new HttpGet(url.toString());
     setDefaultHeaders();
   }
 
   public NeopetsRequest(NeopetsURL url, String contents, ContentType contentType) {
-    this(url.toString(), contents, contentType);
-  }
-
-
-  public NeopetsRequest(String url, String contents, ContentType contentType) {
     this(url, new StringEntity(contents, contentType));
   }
 
   public NeopetsRequest(NeopetsURL url, List<NameValuePair> parameters) {
-    this(url.toString(), parameters);
-  }
-
-  public NeopetsRequest(String url, List<NameValuePair> parameters) {
     this(url, newUrlEncodedFormEntity(parameters));
   }
 
-  public NeopetsRequest(String url, HttpEntity entity) {
-    HttpPost post = new HttpPost(url);
+  public NeopetsRequest(NeopetsURL url, HttpEntity entity) {
+    HttpPost post = new HttpPost(url.toString());
     post.setEntity(entity);
     httpRequest = post;
     setDefaultHeaders();
