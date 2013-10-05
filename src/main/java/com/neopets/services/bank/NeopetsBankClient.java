@@ -39,9 +39,9 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
             .add("amount", neopoints)
             .getParameters();
 
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters);
-    request.setOrigin(NeopetsURL.ROOT.toString());
-    request.setToNotBeCached();
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+            .withOrigin(NeopetsURL.ROOT.toString())
+            .withToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())
             .handle(new InvalidNeopointsAmountExceptionHandler());
@@ -58,9 +58,9 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
             .add("amount", neopoints)
             .getParameters();
 
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters);
-    request.setOrigin(NeopetsURL.ROOT.toString());
-    request.setToNotBeCached();
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+            .withOrigin(NeopetsURL.ROOT.toString())
+            .withToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())
             .handle(new InvalidNeopointsAmountExceptionHandler())
@@ -74,9 +74,9 @@ public class NeopetsBankClient extends NeopetsClient implements NeopetsBank {
             .add("type", "interest")
             .getParameters();
 
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters);
-    request.setOrigin(NeopetsURL.ROOT.toString());
-    request.setToNotBeCached();
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.PROCESS_BANK, parameters)
+            .withOrigin(NeopetsURL.ROOT.toString())
+            .withToNotBeCached();
 
     invoke(request, new ErrorUnmarshaller())
             .handle(new AlreadyClaimedInterestExceptionHandler());

@@ -18,17 +18,15 @@ public class LoginRequestMarshaller implements Marshaller<LoginRequest> {
     NeopetsURL url = in.getUrl();
 
     List<NameValuePair> parameters = new ParametersBuilder()
-           .add("destination", "/" + url.getPath())
-           .add("username", credentials.getUsername())
-           .add("password", credentials.getPassword())
-           .getParameters();
+            .add("destination", "/" + url.getPath())
+            .add("username", credentials.getUsername())
+            .add("password", credentials.getPassword())
+            .getParameters();
 
-    NeopetsRequest request = new NeopetsRequest(NeopetsURL.LOGIN, parameters);
-    request.setReferer(url.toString());
-    request.setOrigin(NeopetsURL.ROOT.toString());
-    request.setToNotBeCached();
-
-    return request;
+    return new NeopetsRequest(NeopetsURL.LOGIN, parameters)
+            .withReferer(url.toString())
+            .withOrigin(NeopetsURL.ROOT.toString())
+            .withToNotBeCached();
   }
 
 }

@@ -56,24 +56,54 @@ public class NeopetsRequest {
     setAccept("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
   }
 
+  public NeopetsRequest withOrigin(String origin) {
+    setOrigin(origin);
+    return this;
+  }
+
   public void setOrigin(String origin) {
     httpRequest.setHeader("Origin", origin);
+  }
+
+  public NeopetsRequest withReferer(String referer) {
+    setReferer(referer);
+    return this;
   }
 
   public void setReferer(String referer) {
     httpRequest.setHeader("Referer", referer);
   }
 
+  public NeopetsRequest withContentType(String contentType) {
+    setContentType(contentType);
+    return this;
+  }
+
   public void setContentType(String contentType) {
     httpRequest.setHeader("Content-Type", contentType);
+  }
+
+  public NeopetsRequest withCacheControl(String cacheControl) {
+    setCacheControl(cacheControl);
+    return this;
   }
 
   public void setCacheControl(String cacheControl) {
     httpRequest.setHeader("Cache-Control", cacheControl);
   }
 
+  public NeopetsRequest withToNotBeCached() {
+    setToNotBeCached();
+    return this;
+  }
+
   public void setToNotBeCached() {
     setCacheControl("max-age=0");
+  }
+
+  public NeopetsRequest withAccept(String accept) {
+    setAccept(accept);
+    return this;
   }
 
   public void setAccept(String accept) {
