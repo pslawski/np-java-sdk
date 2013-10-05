@@ -7,7 +7,7 @@ public class WithdrawalLimitExceptionHandler implements ExceptionHandler<Withdra
 
   @Override
   public void handle(String errorMessage) throws WithdrawalLimitException {
-    if (errorMessage == null && errorMessage.contains("you have already attempted to withdraw")) {
+    if (errorMessage != null && errorMessage.contains("you have already attempted to withdraw")) {
       throw new WithdrawalLimitException(errorMessage);
     }
   }
