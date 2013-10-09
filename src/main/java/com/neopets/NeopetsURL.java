@@ -1,5 +1,10 @@
 package com.neopets;
 
+import org.apache.http.NameValuePair;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 public class NeopetsURL {
 
   public static final NeopetsURL ROOT = new NeopetsURL("");
@@ -14,6 +19,35 @@ public class NeopetsURL {
 
   private NeopetsURL(String path) {
     this.path = path;
+  }
+
+  public NeopetsURL amendQuery(NameValuePair... pairs) {
+    if (pairs.length == 0) {
+      return this;
+    }
+    else {
+      try {
+        StringBuilder builder = new StringBuilder();
+        builder.append(path);
+        builder.append("?");
+
+        boolean firstPair = true;
+        for (NameValuePair pair : pairs) {
+          if (firstPair) {
+            firstPair = false;
+          } else {
+            builder.append("&");
+          }
+          builder.append(URLEncoder.encode(pair.getName(), "UTF-8"));
+          builder.append("=");
+          builder.append(URLEncoder.encode(pair.getValue(), "UTF-8"));
+        }
+        return new NeopetsURL(builder.toString());
+
+      } catch (UnsupportedEncodingException e) {
+        throw new NeopetsClientException(e.getMessage(), e);
+      }
+    }
   }
 
   public String getPath() {
