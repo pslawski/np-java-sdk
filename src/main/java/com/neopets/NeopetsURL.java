@@ -12,6 +12,7 @@ public class NeopetsURL {
   public static final NeopetsURL LOGIN = new NeopetsURL("login.phtml");
   public static final NeopetsURL BANK = new NeopetsURL("bank.phtml");
   public static final NeopetsURL PROCESS_BANK = new NeopetsURL("process_bank.phtml");
+  public static final NeopetsURL STOCK_MARKET = new NeopetsURL("stockmarket.phtml");
 
   private static final String BASE_URL = "http://www.neopets.com";
 
