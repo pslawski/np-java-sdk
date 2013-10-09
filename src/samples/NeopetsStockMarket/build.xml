@@ -1,0 +1,13 @@
+<project name="Neopets Stock Market Sample" default="run" basedir=".">
+    <path id="neopets.java.sdk.classpath">
+      <fileset dir="../../../lib" includes="**/*.jar"/>
+      <fileset dir="../../../target" includes="**/*.jar"/>
+        <pathelement location="."/>
+    </path>
+
+    <target name="run">
+        <javac srcdir="." destdir="." classpathref="neopets.java.sdk.classpath"/>
+        <java classname="NeopetsStockMarketSample" classpathref="neopets.java.sdk.classpath" fork="true"/>
+    </target>
+</project>
+
