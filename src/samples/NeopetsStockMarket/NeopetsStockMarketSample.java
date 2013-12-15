@@ -2,7 +2,7 @@ import com.neopets.auth.ClasspathPropertiesFileCredentialsProvider;
 import com.neopets.auth.NeopetsCredentialsProvider;
 import com.neopets.services.stockmarket.NeopetsStockMarket;
 import com.neopets.services.stockmarket.NeopetsStockMarketClient;
-import com.neopets.services.stockmarket.model.Stock;
+import com.neopets.services.stockmarket.model.*;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -27,10 +27,54 @@ public class NeopetsStockMarketSample {
 
     for (Stock stock : stocks) {
       if (stock.getCurrentPrice() == 15) {
-        System.out.println("Buying 10 shares of " + stock.getTickerSymbol() + ".");
+        System.out.println("===========================================");
+        System.out.printf("Buying 10 shares of %s at 15 NP per share.\n", stock.getTickerSymbol());
+        System.out.println("===========================================");
+
         market.buyShares(stock, 10);
         break;
       }
+    }
+
+    GetPortfolioResult result = market.getPortfolio();
+    Portfolio portfolio = result.getPortfolio();
+
+    System.out.println("Portfolio:");
+    System.out.println("===========================================");
+    for (PurchasedStock stock : portfolio.getStocks()) {
+      System.out.printf("Stock: %s\tAmount: %d\tPaid: %d\n",
+          stock.getTickerSymbol(), stock.getAmount(), stock.getPaid());
+    }
+
+    boolean sellingShares = false;
+    PurchasedStock stockToSell = null;
+    int amountToSell = 5;
+
+    for (PurchasedStock stock : portfolio.getStocks()) {
+      if (stock.getCurrentPrice() > 15 && stock.getAmount() >= amountToSell) {
+        sellingShares = true;
+        stockToSell = stock;
+
+        for (PurchasedShares shares : stock.getSharesList()) {
+          if (shares.getAmount() >= amountToSell) {
+            shares.setSellAmount(amountToSell);
+          }
+          else {
+            shares.setSellAmount(shares.getAmount());
+            amountToSell -= shares.getAmount();
+          }
+        }
+        break;
+      }
+    }
+
+    if (sellingShares) {
+      System.out.println("===========================================");
+      System.out.printf("Selling %d shares of %s at %d NP per share.\n",
+          amountToSell, stockToSell.getTickerSymbol(), stockToSell.getCurrentPrice());
+      System.out.println("===========================================");
+
+      market.sellShares(portfolio);
     }
   }
 
