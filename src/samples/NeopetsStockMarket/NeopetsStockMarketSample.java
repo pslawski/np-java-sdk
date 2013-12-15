@@ -46,34 +46,22 @@ public class NeopetsStockMarketSample {
           stock.getTickerSymbol(), stock.getAmount(), stock.getPaid());
     }
 
-    boolean sellingShares = false;
     PurchasedStock stockToSell = null;
     int amountToSell = 5;
 
     for (PurchasedStock stock : portfolio.getStocks()) {
       if (stock.getCurrentPrice() > 15 && stock.getAmount() >= amountToSell) {
-        sellingShares = true;
         stockToSell = stock;
-
-        for (PurchasedShares shares : stock.getSharesList()) {
-          if (shares.getAmount() >= amountToSell) {
-            shares.setSellAmount(amountToSell);
-          }
-          else {
-            shares.setSellAmount(shares.getAmount());
-            amountToSell -= shares.getAmount();
-          }
-        }
-        break;
       }
     }
 
-    if (sellingShares) {
+    if (stockToSell != null) {
       System.out.println("===========================================");
       System.out.printf("Selling %d shares of %s at %d NP per share.\n",
           amountToSell, stockToSell.getTickerSymbol(), stockToSell.getCurrentPrice());
       System.out.println("===========================================");
 
+      stockToSell.setSellAmount(amountToSell);
       market.sellShares(portfolio);
     }
   }

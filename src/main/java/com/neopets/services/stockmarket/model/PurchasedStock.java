@@ -12,6 +12,43 @@ public class PurchasedStock {
   private int paid;
   List<PurchasedShares> sharesList;
 
+  public void setToSell() {
+    setSellAmount(amount);
+  }
+
+  public int getSellAmount() {
+    int sellAmount = 0;
+    for (PurchasedShares shares : sharesList) {
+      int sharesSellAmount = shares.getSellAmount();
+      if (sharesSellAmount > 0) {
+        sellAmount += sharesSellAmount;
+      }
+    }
+    return sellAmount;
+  }
+
+  public void setSellAmount(int sellAmount) {
+
+    for (PurchasedShares shares : sharesList) {
+      if (sellAmount <= 0) {
+        shares.setSellAmount(0);
+      }
+      else if (shares.getAmount() >= sellAmount) {
+        shares.setSellAmount(sellAmount);
+        sellAmount = 0;
+      }
+      else {
+        shares.setToSell();
+        sellAmount -= shares.getAmount();
+      }
+    }
+  }
+
+  public PurchasedStock withSellAmount(int sellAmount) {
+    setSellAmount(sellAmount);
+    return this;
+  }
+
   public String getTickerSymbol() {
     return tickerSymbol;
   }

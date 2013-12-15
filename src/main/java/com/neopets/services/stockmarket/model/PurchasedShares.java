@@ -46,6 +46,10 @@ public class PurchasedShares {
     return this;
   }
 
+  public void setToSell() {
+    setSellAmount(amount);
+  }
+
   public int getSellAmount() {
     return sellAmount;
   }
