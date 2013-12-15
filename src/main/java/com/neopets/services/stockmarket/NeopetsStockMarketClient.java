@@ -6,6 +6,7 @@ import com.neopets.NeopetsURL;
 import com.neopets.auth.NeopetsCredentials;
 import com.neopets.services.stockmarket.model.*;
 import com.neopets.services.stockmarket.model.handlers.CannotAffordAmountExceptionHandler;
+import com.neopets.services.stockmarket.model.handlers.CannotAffordToSellExceptionHandler;
 import com.neopets.services.stockmarket.model.handlers.ExceedAmountLimitExceptionHandler;
 import com.neopets.services.stockmarket.model.handlers.StockPriceTooLowExceptionHandler;
 import com.neopets.services.stockmarket.model.transform.*;
@@ -64,6 +65,18 @@ public class NeopetsStockMarketClient extends NeopetsClient implements NeopetsSt
         .withToNotBeCached();
 
     return invoke(request, new GetPortfolioResultUnmarshaller());
+  }
+
+  @Override
+  public void sellShares(Portfolio portfolio) throws CannotAffordToSellException {
+    sellShares(new SellSharesRequest(portfolio));
+  }
+
+  public void sellShares(SellSharesRequest sellSharesRequest) throws CannotAffordToSellException {
+    NeopetsRequest request = new SellSharesRequestMarshaller().marshall(sellSharesRequest);
+
+    invoke(request, new ErrorUnmarshaller())
+        .handle(new CannotAffordToSellExceptionHandler());
   }
 
 }

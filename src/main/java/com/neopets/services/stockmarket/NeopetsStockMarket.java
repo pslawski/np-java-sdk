@@ -14,4 +14,6 @@ public interface NeopetsStockMarket {
 
   public GetPortfolioResult getPortfolio();
 
+  public void sellShares(Portfolio portfolio) throws CannotAffordToSellException;
+
 }
