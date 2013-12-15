@@ -1,6 +1,7 @@
 package com.neopets;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -13,6 +14,9 @@ public class NeopetsURL {
   public static final NeopetsURL BANK = new NeopetsURL("bank.phtml");
   public static final NeopetsURL PROCESS_BANK = new NeopetsURL("process_bank.phtml");
   public static final NeopetsURL STOCK_MARKET = new NeopetsURL("stockmarket.phtml");
+  public static final NeopetsURL STOCK_MARKET_BUY = NeopetsURL.STOCK_MARKET.amendQuery(
+          new BasicNameValuePair("type", "buy"));
+  public static final NeopetsURL STOCK_MARKET_PORTFOLIO = NeopetsURL.STOCK_MARKET.amendQuery(
 
   private static final String BASE_URL = "http://www.neopets.com";
 

@@ -4,8 +4,12 @@ import com.neopets.NeopetsClient;
 import com.neopets.NeopetsRequest;
 import com.neopets.NeopetsURL;
 import com.neopets.auth.NeopetsCredentials;
-import com.neopets.services.stockmarket.model.ListAllStocksResult;
-import com.neopets.services.stockmarket.model.transform.ListAllStocksResultUnmarshaller;
+import com.neopets.services.stockmarket.model.*;
+import com.neopets.services.stockmarket.model.handlers.CannotAffordAmountExceptionHandler;
+import com.neopets.services.stockmarket.model.handlers.ExceedAmountLimitExceptionHandler;
+import com.neopets.services.stockmarket.model.handlers.StockPriceTooLowExceptionHandler;
+import com.neopets.services.stockmarket.model.transform.*;
+import com.neopets.transform.ErrorUnmarshaller;
 import org.apache.http.message.BasicNameValuePair;
 
 public class NeopetsStockMarketClient extends NeopetsClient implements NeopetsStockMarket {
@@ -23,6 +27,35 @@ public class NeopetsStockMarketClient extends NeopetsClient implements NeopetsSt
             .withToNotBeCached();
 
     return invoke(request, new ListAllStocksResultUnmarshaller());
+  }
+
+  @Override
+  public void buyShares(Stock stock, int amount) throws StockPriceTooLowException,
+          CannotAffordAmountException, ExceedAmountLimitException {
+    buyShares(stock.getTickerSymbol(), amount);
+  }
+
+  @Override
+  public void buyShares(String tickerSymbol, int amount) throws CannotAffordAmountException,
+          ExceedAmountLimitException, StockPriceTooLowException {
+    buyShares(new BuySharesRequest(tickerSymbol, amount));
+  }
+
+  public void buyShares(BuySharesRequest buySharesRequest) throws CannotAffordAmountException,
+            ExceedAmountLimitException, StockPriceTooLowException {
+
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.STOCK_MARKET_BUY)
+        .withToNotBeCached();
+
+    IntermediateBuySharesResult result = invoke(request, new IntermediateBuySharesResultUnmarshaller());
+
+    request = new BuySharesRequestMarshaller().marshall(buySharesRequest
+            .withReferenceCheck(result.getReferenceCheck()));
+
+    invoke(request, new ErrorUnmarshaller())
+            .handle(new CannotAffordAmountExceptionHandler())
+            .handle(new ExceedAmountLimitExceptionHandler())
+            .handle(new StockPriceTooLowExceptionHandler());
   }
 
 }

@@ -26,7 +26,11 @@ public class NeopetsStockMarketSample {
     });
 
     for (Stock stock : stocks) {
-      System.out.println(stock);
+      if (stock.getCurrentPrice() == 15) {
+        System.out.println("Buying 10 shares of " + stock.getTickerSymbol() + ".");
+        market.buyShares(stock, 10);
+        break;
+      }
     }
   }
 
