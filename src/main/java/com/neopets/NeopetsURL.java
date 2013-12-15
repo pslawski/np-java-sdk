@@ -17,6 +17,8 @@ public class NeopetsURL {
   public static final NeopetsURL STOCK_MARKET_BUY = NeopetsURL.STOCK_MARKET.amendQuery(
           new BasicNameValuePair("type", "buy"));
   public static final NeopetsURL STOCK_MARKET_PORTFOLIO = NeopetsURL.STOCK_MARKET.amendQuery(
+          new BasicNameValuePair("type", "portfolio"));
+  public static final NeopetsURL PROCESS_STOCK_MARKET = new NeopetsURL("process_stockmarket.phtml");
 
   private static final String BASE_URL = "http://www.neopets.com";
 

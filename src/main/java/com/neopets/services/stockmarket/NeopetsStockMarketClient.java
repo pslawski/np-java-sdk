@@ -58,4 +58,12 @@ public class NeopetsStockMarketClient extends NeopetsClient implements NeopetsSt
             .handle(new StockPriceTooLowExceptionHandler());
   }
 
+  @Override
+  public GetPortfolioResult getPortfolio() {
+    NeopetsRequest request = new NeopetsRequest(NeopetsURL.STOCK_MARKET_PORTFOLIO)
+        .withToNotBeCached();
+
+    return invoke(request, new GetPortfolioResultUnmarshaller());
+  }
+
 }

@@ -12,4 +12,6 @@ public interface NeopetsStockMarket {
   public void buyShares(String tickerSymbol, int amount) throws CannotAffordAmountException,
           ExceedAmountLimitException, StockPriceTooLowException;
 
+  public GetPortfolioResult getPortfolio();
+
 }
